@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/homepage', function () {
+    return view('landingpage.index');
+});
+Route::get('/homepage', function () {
+    return view('landingpage.beranda');
+});
+Route::get('/kampusmerdeka', function () {
+    return view('landingpage.km');
 });
