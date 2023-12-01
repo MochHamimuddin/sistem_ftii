@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/', function () {
+    return view('landingpage.index');
+});
 Route::get('/homepage', function () {
     return view('landingpage.index');
 });
@@ -21,4 +23,16 @@ Route::get('/homepage', function () {
 });
 Route::get('/kampusmerdeka', function () {
     return view('landingpage.km');
+});
+Route::get('/magenta', function () {
+    return view('landingpage.magen');
+});
+Route::get('/internalftii', function () {
+    return view('landingpage.internal');
+});
+Route::get('/login', function () {
+    return view('layout.login');
+});
+Route::get('/register', function () {
+    return view('layout.register');
 });

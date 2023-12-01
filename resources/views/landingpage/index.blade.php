@@ -48,7 +48,7 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('landingpage/assets/js/main.js')}}"></script>
-
+  <script src="https://kit.fontawesome.com/4a4251cc63.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

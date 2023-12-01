@@ -5,7 +5,7 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>Program Kampus Merdeka</h2>
+        <h2>Program Internal FTII</h2>
       </div>
 
       <div class="row">
