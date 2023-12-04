@@ -40,3 +40,6 @@ Route::get('/register', function () {
 Route::get('/dashboard', function () {
     return view('admin.index');
 });
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+});
