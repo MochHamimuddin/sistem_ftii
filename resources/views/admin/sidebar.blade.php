@@ -20,24 +20,24 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="/kelompok">
+            <a href="/mitra">
               <i class="bi bi-circle"></i><span>Data Mitra</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/dospem">
               <i class="bi bi-circle"></i><span>Data Dospem</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/peserta">
               <i class="bi bi-circle"></i><span>Data Peserta</span>
             </a>
           </li>
         </ul>
       </li><!-- End Components Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/administrasi">
           <i class="bi bi-building-down"></i>
           <span>Administrasi</span>
         </a>

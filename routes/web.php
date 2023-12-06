@@ -46,3 +46,15 @@ Route::get('/dashboard', function () {
 Route::get('/profile', function () {
     return view('profilepeserta.profile');
 });
+Route::get('/dospem', function () {
+    return view('masterdata.datadospem');
+});
+Route::get('/mitra', function () {
+    return view('masterdata.datamitra');
+});
+Route::get('/peserta', function () {
+    return view('masterdata.datapeserta');
+});
+Route::get('/administrasi', function () {
+    return view('administrasi.adminis');
+});
