@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +31,9 @@ Route::get('/magenta', function () {
 Route::get('/internalftii', function () {
     return view('landingpage.internal');
 });
-Route::get('/login', function () {
-    return view('layout.login');
-});
-Route::get('/register', function () {
-    return view('layout.register');
-});
+Route::get('/login', [AuthController::class, 'login'])->name('login.form')->middleware('guest');
+Route::post('/login-proses', [AuthController::class, 'prosesLogin'])->name('login.process')->middleware('guest');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', function () {
     return view('admin.index');
