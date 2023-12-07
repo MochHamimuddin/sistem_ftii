@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,26 +34,13 @@ Route::get('/internalftii', function () {
 });
 Route::get('/login', [AuthController::class, 'login'])->name('login.form')->middleware('guest');
 Route::post('/login-proses', [AuthController::class, 'prosesLogin'])->name('login.process')->middleware('guest');
+Route::get('/register',[AuthController::class, 'register'])->name('register.form');
+Route::post('/prosesRegister', [AuthController::class, 'create'])->name('register.create');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('admin.index');
+Route::group(['middleware' => ['auth:user', 'cekRole:admin']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
 });
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
-Route::get('/profile', function () {
-    return view('profilepeserta.profile');
-});
-Route::get('/dospem', function () {
-    return view('masterdata.datadospem');
-});
-Route::get('/mitra', function () {
-    return view('masterdata.datamitra');
-});
-Route::get('/peserta', function () {
-    return view('masterdata.datapeserta');
-});
-Route::get('/administrasi', function () {
-    return view('administrasi.adminis');
+Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,mahasiswa,peserta']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
 });

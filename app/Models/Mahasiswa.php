@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Program;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Mahasiswa extends Authenticatable
 {
@@ -11,8 +12,11 @@ class Mahasiswa extends Authenticatable
 
     protected $table = 'mahasiswa';
     protected $fillable = [
-        'nim','nama','jenis_kelamin','semester','alamat', 'email','telpon', 'password', 'foto',
+        'nim','name','jenis_kelamin','semester','alamat', 'email','telpon', 'password','role', 'foto','program_id',
     ];
+    public function Kegiatan (){
+        return $this->belongsTo(Program::class,'program_id');
+    }
     protected $hidden = [
         'remember_token'
     ];

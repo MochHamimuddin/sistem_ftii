@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Program;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -17,13 +22,10 @@ class AuthController extends Controller
     }
     public function prosesLogin(Request $request)
     {
-       $credentials = $request->validate([
-            'email' => ['required','email'],
-            'password' => ['required'],
-       ]);
-       if (Auth::attempt($credentials)){
-        $request->session()->regenerate();
-        return redirect()->intended('dashboard');
+       if (Auth::guard('mahasiswa')->attempt($request->only('email','password'))) {
+        return redirect('/dashboard');
+       }elseif(Auth::guard('user')->attempt($request->only('email','password'))){
+        return redirect('/dashboard');
        }
        Session::flash('status','failed');
        Session::flash('message','Anda gagal login');
@@ -32,50 +34,65 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->route('login.form');
+        if(Auth::guard('mahasiswa')->check()){
+            Auth::guard('mahasiswa')->logout();
+        }elseif(Auth::guard('user')->check()){
+            Auth::guard('user')->logout();
+        }
+        return redirect('/');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function register(){
+        $programs = Program::all();
+        $maha = Mahasiswa::all();
+        return view('layout.register',compact('programs','maha'));
     }
+    public function create(Request $request){
+        $request->validate([
+            'nim'=>'required',
+            'name'=>'required',
+            'jenis_kelamin'=>'required',
+            'semester'=>'required',
+            'alamat' => 'required',
+            'email'=>'required|unique:mahasiswa,email',
+            'telpon' => 'required',
+            'password' => 'required',
+             'program_id' => 'required|exists:program,id'
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        ],[
+            'nim.required' => 'Mohon isi kolom NIM.',
+            'name.required' => 'Mohon isi kolom Nama.',
+            'jenis_kelamin.required' => 'Mohon pilih Jenis Kelamin.',
+            'semester.required' => 'Mohon isi kolom Semester.',
+            'alamat.required' => 'Mohon isi kolom Alamat.',
+            'email.required' => 'Mohon isi kolom Email.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'telpon.required' => 'Mohon isi kolom Telpon.',
+            'password.required' => 'Mohon isi kolom Password.',
+            'program_id.required' => 'Mohon pilih Program.',
+            'program_id.exists' => 'Program tidak valid.',
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+        ]);
+        $program = Program::find($request->program_id);
+        if (!$program) {
+            return redirect('/register')->with('error', 'Program tidak valid.');
+        }
+        $data = [
+            'nim'=>$request->nim,
+            'name'=>$request->name,
+            'jenis_kelamin'=>$request->jenis_kelamin,
+            'semester'=>$request->semester,
+            'alamat'=>$request->alamat,
+            'email'=>$request->email,
+            'telpon'=>$request->telpon,
+            'password'=>hash::make($request->password),
+            'foto' => '1.png',
+            'program_id'=>$request->program_id,
+            'remember_token' => Str::random(60),
+        ];
+        Mahasiswa::create($data);
+        Session::flash('status','success');
+       Session::flash('message','Anda Berhasil Register, silahkan login');
+        return redirect()->route('register.form');
+}
 }

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Program;
 use Illuminate\Http\Request;
 
-class ProgramController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $program = Program::all();
+        return view('admin.dashboard');
     }
 
     /**
