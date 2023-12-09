@@ -14,7 +14,7 @@ class Mahasiswa extends Authenticatable
     protected $fillable = [
         'nim','name','jenis_kelamin','semester','alamat', 'email','telpon', 'password','role', 'foto','program_id',
     ];
-    public function Kegiatan (){
+    public function JenisProgram (){
         return $this->belongsTo(Program::class,'program_id');
     }
     protected $hidden = [

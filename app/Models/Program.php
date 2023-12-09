@@ -12,9 +12,9 @@ class Program extends Model
     protected $table = 'program';
     protected $primarykey = 'id';
     protected $fillable = [
-        'nama','jenis_kegiatan','foto',
+        'nama','foto','mitra_id',
     ] ;
-    public function Kegiatan (){
+    public function JenisProgram (){
         return $this->hasMany(Mahasiswa::class,'program_id');
     }
 }
