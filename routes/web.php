@@ -32,13 +32,13 @@ Route::get('/magenta', function () {
 Route::get('/internalftii', function () {
     return view('landingpage.internal');
 });
-Route::get('/login', [AuthController::class, 'login'])->name('login.form')->middleware('guest');
-Route::post('/login-proses', [AuthController::class, 'prosesLogin'])->name('login.process')->middleware('guest');
+Route::get('/login', [AuthController::class, 'login'])->name('login.form');
+Route::post('/login-proses', [AuthController::class, 'prosesLogin'])->name('login.process');
 Route::get('/register',[AuthController::class, 'register'])->name('register.form');
 Route::post('/prosesRegister', [AuthController::class, 'create'])->name('register.create');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth:user', 'cekRole:admin,kaprodi,Koordinator MBKM']], function () {
+Route::group(['middleware' => ['auth:user', 'cekRole:admin,user,kaprodi,Koordinator MBKM']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
 });
 Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,mahasiswa,peserta']], function () {

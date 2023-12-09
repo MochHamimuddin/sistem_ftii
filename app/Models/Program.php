@@ -14,7 +14,10 @@ class Program extends Model
     protected $fillable = [
         'nama','foto','mitra_id',
     ] ;
-    public function JenisProgram (){
+    public function Kegiatan (){
         return $this->hasMany(Mahasiswa::class,'program_id');
+    }
+    public function JenisMitra (){
+        return $this->belongsTo(Mahasiswa::class,'mitra_id');
     }
 }
