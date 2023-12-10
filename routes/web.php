@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -30,8 +31,8 @@ Route::get('/magenta', function () {
 Route::get('/internalftii', function () {
     return view('landingpage.internal');
 });
-Route::get('/login', [AuthController::class, 'login'])->name('login.form');
-Route::post('/login-proses', [AuthController::class, 'prosesLogin'])->name('login.process');
+Route::get('/login', [AuthController::class, 'login'])->name('login.form')->middleware('guest');
+Route::post('/login-proses', [AuthController::class, 'prosesLogin'])->name('login.process')->middleware('guest');
 Route::get('/register',[AuthController::class, 'register'])->name('register.form');
 Route::post('/prosesRegister', [AuthController::class, 'create'])->name('register.create');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -41,4 +42,5 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });*/
 Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koordinator MBKM,peserta']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
+    Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
 });

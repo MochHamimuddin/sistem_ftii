@@ -21,8 +21,8 @@
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <img src="{{ asset('admin/img/profile-img.jpg') }}" class="rounded-circle">
-            <h2>Kevin Anderson</h2>
-            <h3>Web Designer</h3>
+            <h2>{{ auth()->user()->name }}</h2>
+            <h3>{{ $programs->nama}}</h3>
           </div>
         </div>
 

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Program;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mitra extends Model
 {
@@ -14,6 +15,6 @@ class Mitra extends Model
         'nama','foto',
     ] ;
     public function JenisMitra (){
-        return $this->hasMany(Mahasiswa::class,'mitra_id');
+        return $this->hasMany(Program::class,'mitra_id');
     }
 }
