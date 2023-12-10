@@ -32,13 +32,13 @@
                   <h3 class="text-center fw-bold mx-3 mb-0">Login</h3>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="email" id="email" name="email" class="form-control form-control-lg"
-                    placeholder="Enter a valid email address" required />
-                  <label class="form-label" for="email">Email address</label>
+                    <input type="number" id="nim" name="nim" class="form-control form-control-lg"
+                    placeholder="Masukan Nim" required />
+                  <label class="form-label" for="nim">Masukan Nim</label>
                 </div>
                 <div class="form-outline mb-3">
                     <input type="password" id="password" name="password" class="form-control form-control-lg"
-                    placeholder="Enter password" required />
+                    placeholder="Masukan Password" required />
                   <label class="form-label" for="password">Password</label>
                 </div>
 

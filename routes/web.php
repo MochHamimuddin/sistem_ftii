@@ -15,11 +15,9 @@ use App\Http\Controllers\DashboardController;
 |
 */
 Route::get('/', function () {
-    return view('landingpage.index');
+    return view('landingpage.beranda');
 });
-Route::get('/homepage', function () {
-    return view('landingpage.index');
-});
+
 Route::get('/homepage', function () {
     return view('landingpage.beranda');
 });
@@ -38,9 +36,9 @@ Route::get('/register',[AuthController::class, 'register'])->name('register.form
 Route::post('/prosesRegister', [AuthController::class, 'create'])->name('register.create');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth:user', 'cekRole:admin,user,kaprodi,Koordinator MBKM']], function () {
+/*Route::group(['middleware' => ['auth:user', 'cekRole:admin']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
-});
-Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,mahasiswa,peserta']], function () {
+});*/
+Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koordinator MBKM,peserta']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
 });

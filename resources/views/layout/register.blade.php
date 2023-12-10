@@ -21,27 +21,37 @@
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 @if(Session::has('status'))
-            <div class="alert alert-succes" role="alert">
-                    {{ Session::get('message') }}
-            </div>
-            @endif
-
+                    <script>
+                        window.addEventListener('DOMContentLoaded', (event) => {
+                            alert("{{ Session::get('message') }}");
+                        });
+                    </script>
+                @endif
               <form id="registerForm" method="POST" action="{{ route('register.create') }}">
                 @csrf
                 <div class="divider d-flex align-items-center my-4">
                   <h3 class="text-center fw-bold mx-3 mb-0">Register</h3>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('nim')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <input type="nim" id="nim" name="nim" class="form-control form-control-lg"
                     placeholder="Masukan Nim" required />
                   <label class="form-label" for="nim">Nim Mahasiswa</label>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <input type="name" id="name" name="name" class="form-control form-control-lg"
                     placeholder="Masukan Nama" required />
                   <label class="form-label" for="name">Nama Lengkap</label>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('jenis_kelamin')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <select id="jenis_kelamin" name="jenis_kelamin" class="form-control form-control-lg" required>
                         <option value="" disabled selected>Pilih Jenis Kelamin</option>
                         <option value="L">Laki-laki</option>
@@ -50,6 +60,9 @@
                     <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('semester')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <select id="semester" name="semester" class="form-control form-control-lg" required>
                         <option value="" disabled selected>Pilih Semester</option>
                         <option value="1(Ganjil)">1(Ganjil)</option>
@@ -64,25 +77,37 @@
                     <label class="form-label" for="semester">Semester</label>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('alamat')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <textarea id="alamat" name="alamat" class="form-control form-control-lg" placeholder="Masukkan Alamat Lengkap" required></textarea>
                     <label class="form-label" for="alamat">Alamat Lengkap</label>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <input type="email" id="email" name="email" class="form-control form-control-lg"
-                    placeholder="Enter a valid email address" required />
+                    placeholder="Masukan Email" required />
                   <label class="form-label" for="email">Email address</label>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('telpon')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <input type="telpon" id="telpon" name="telpon" class="form-control form-control-lg"
                     placeholder="Masukan No Telpon" required />
                   <label class="form-label" for="telpon">Masukan No Telpon</label>
                 </div>
                 <div class="form-outline mb-3">
                     <input type="password" id="password" name="password" class="form-control form-control-lg"
-                    placeholder="Enter password" required />
-                  <label class="form-label" for="password">Password</label>
+                    placeholder="Masukan password" required />
+                  <label class="form-label" for="password">Masukan Password</label>
                 </div>
                 <div class="form-outline mb-4">
+                    @error('program_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <select id="program_id" name="program_id" class="form-control form-control-lg" required>
                         <option value="" disabled selected>Pilih Program</option>
                         @foreach($programs as $program)

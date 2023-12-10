@@ -22,9 +22,9 @@ class AuthController extends Controller
     }
     public function prosesLogin(Request $request)
     {
-       if (Auth::guard('mahasiswa')->attempt($request->only('email','password'))) {
+       if (Auth::guard('mahasiswa')->attempt($request->only('nim','password'))) {
         return redirect('/dashboard');
-       }elseif(Auth::guard('user')->attempt($request->only('email','password'))){
+       }elseif(Auth::guard('user')->attempt($request->only('nim','password'))){
         return redirect('/dashboard');
        }
        Session::flash('status','failed');
@@ -48,7 +48,7 @@ class AuthController extends Controller
     }
     public function create(Request $request){
         $request->validate([
-            'nim'=>'required',
+            'nim'=>'required|unique:mahasiswa,nim',
             'name'=>'required',
             'jenis_kelamin'=>'required',
             'semester'=>'required',
@@ -60,6 +60,7 @@ class AuthController extends Controller
 
         ],[
             'nim.required' => 'Mohon isi kolom NIM.',
+            'nim.unique' => 'Nim sudah terdaftar.',
             'name.required' => 'Mohon isi kolom Nama.',
             'jenis_kelamin.required' => 'Mohon pilih Jenis Kelamin.',
             'semester.required' => 'Mohon isi kolom Semester.',
