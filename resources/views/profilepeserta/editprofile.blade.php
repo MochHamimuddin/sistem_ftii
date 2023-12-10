@@ -1,4 +1,6 @@
-<form>
+<form method="POST" action="{{ route('profile.update', $rs->id) }}">
+    @csrf
+    @method('PUT')
     <div class="row mb-3">
       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
       <div class="col-md-8 col-lg-9">
@@ -13,53 +15,71 @@
     <div class="row mb-3">
       <label for="nim" class="col-md-4 col-lg-3 col-form-label">Nim</label>
       <div class="col-md-8 col-lg-9">
-        <input name="nim" type="number" class="form-control" id="nim" value="2003015150">
+        <input name="nim" type="number" class="form-control" id="nim" value="{{ $rs->nim }}">
       </div>
     </div>
     <div class="row mb-3">
-        <label for="nama" class="col-md-4 col-lg-3 col-form-label">Nama Lengkap</label>
+        <label for="name" class="col-md-4 col-lg-3 col-form-label">Nama Lengkap</label>
         <div class="col-md-8 col-lg-9">
-          <input name="nama" type="text" class="form-control" id="nama" value="Kevin Anderson">
+          <input name="name" type="text" class="form-control" id="name" value="{{ $rs->name }}">
         </div>
       </div>
-    <div class="row mb-3">
-      <label for="about" class="col-md-4 col-lg-3 col-form-label">Tentang Saya</label>
-      <div class="col-md-8 col-lg-9">
-        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+      <div class="row mb-3">
+        <label for="jenis_kelamin" class="col-md-4 col-lg-3 col-form-label">Jenis Kelamin</label>
+        <div class="col-md-8 col-lg-9">
+            <select id="jenis_kelamin" name="jenis_kelamin" class="form-control form-control-lg" required>
+                <option value="" disabled selected>{{ $rs->jenis_kelamin}}</option>
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+            </select>
+        </div>
       </div>
-    </div>
+      <div class="row mb-3">
+        <label for="semester" class="col-md-4 col-lg-3 col-form-label">Semester</label>
+        <div class="col-md-8 col-lg-9">
+            <select id="semester" name="semester" class="form-control form-control-lg" required>
+                <option value="" disabled selected>{{ $rs->semester}}</option>
+                <option value="1(Ganjil)">1(Ganjil)</option>
+                <option value="2(Genap)">2(Genap)</option>
+                <option value="3(Ganjil)">3(Ganjil)</option>
+                <option value="4(Genap)">4(Genap)</option>
+                <option value="5(Ganjil)">5(Ganjil)</option>
+                <option value="6(Genap)">6(Genap)</option>
+                <option value="7(Ganjil)">7(Ganjil)</option>
+                <option value="8(Genap)">8(Genap)</option>
+            </select>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="alamat" class="col-md-4 col-lg-3 col-form-label">Alamat Lengkap</label>
+        <div class="col-md-8 col-lg-9">
+          <textarea name="alamat" class="form-control" id="alamat" style="height: 80px">{{ $rs->alamat }}</textarea>
+        </div>
+      </div>
     <div class="row mb-3">
         <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
         <div class="col-md-8 col-lg-9">
-          <input name="email" type="text" class="form-control" id="email" value="uhamka.ac.id">
+          <input name="email" type="text" class="form-control" id="email" value="{{ $rs->email }}">
         </div>
       </div>
     <div class="row mb-3">
-      <label for="notelp" class="col-md-4 col-lg-3 col-form-label">No Telpon</label>
+      <label for="telpon" class="col-md-4 col-lg-3 col-form-label">No Telpon</label>
       <div class="col-md-8 col-lg-9">
-        <input name="notelp" type="text" class="form-control" id="notelp" value="081233838624">
+        <input name="telpon" type="text" class="form-control" id="telpon" value="{{ $rs->telpon }}">
       </div>
     </div>
     <div class="row mb-3">
-        <label for="alamat" class="col-md-4 col-lg-3 col-form-label">Alamat Lengkap</label>
-        <div class="col-md-8 col-lg-9">
-          <textarea name="alamat" class="form-control" id="alamat" style="height: 80px">Pasar Rebo</textarea>
+      <label for="program_id" class="col-md-4 col-lg-3 col-form-label">Program</label>
+      <div class="col-md-8 col-lg-9">
+        <select id="program_id" name="program_id" class="form-control form-control-lg" required>
+            <option value="" disabled selected>{{ $programs->nama }}</option>
+            @foreach($data as $program)
+                <option value="{{ $program->id }}">{{ $program->nama }}</option>
+            @endforeach
+        </select>
         </div>
-      </div>
-    <div class="row mb-3">
-      <label for="mitra" class="col-md-4 col-lg-3 col-form-label">Nama Mitra</label>
-      <div class="col-md-8 col-lg-9">
-        <input name="mitra" type="text" class="form-control" id="mitra" value="MBKM">
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <label for="program" class="col-md-4 col-lg-3 col-form-label">Program</label>
-      <div class="col-md-8 col-lg-9">
-        <input name="program" type="text" class="form-control" id="program" value="Bangkit">
-      </div>
     </div>
     <div class="text-center">
-      <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+      <button name="proses" value="simpan" type="submit" class="btn btn-primary">Simpan Perubahan</button>
     </div>
   </form>

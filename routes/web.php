@@ -43,4 +43,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koordinator MBKM,peserta']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
     Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 });

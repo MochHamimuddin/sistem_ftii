@@ -23,7 +23,8 @@ class ProfileController extends Controller
         }
         $programs = Program::find($rs->program_id);
         $mitra = Mitra::find($programs->mitra_id);
-        return view('profilepeserta.profile', compact('rs', 'programs','mitra'));
+        $data = Program::all();
+        return view('profilepeserta.profile', compact('rs','data', 'programs','mitra'));
     }
 
     /**
@@ -55,32 +56,35 @@ class ProfileController extends Controller
      */
     public function edit(string $id)
     {
+        $data = Program::all();
         $rs = Mahasiswa::find($id);
 
         if (!$rs) {
             return abort(404);
         }
-
         $programs = Program::find($rs->program_id);
         $mitra = Mitra::find($programs->mitra_id);
 
-        return view('profilepeserta.profile', compact('rs', 'programs', 'mitra'));
+        return view('profilepeserta.profile', compact('data','rs', 'programs', 'mitra'));
     }
     public function update(Request $request, string $id)
     {
-        $rs = Mahasiswa::find($id);
+        $rs = Mahasiswa::findOrFail($id);
 
         if (!$rs) {
             return abort(404);
-        }   
-        $rs->nama = $request->input('nama');
-        $rs->email = $request->input('email');
-        $rs->no_telpon = $request->input('no_telpon');
+        }
+        $rs->nim = $request->input('nim');
+        $rs->name = $request->input('name');
+        $rs->jenis_kelamin = $request->input('jenis_kelamin');
+        $rs->semester = $request->input('semester');
         $rs->alamat = $request->input('alamat');
-        // Update kolom lain yang perlu diubah
-    
+        $rs->email = $request->input('email');
+        $rs->telpon = $request->input('telpon');
+        $rs->program_id = $request->input('program_id');
+
         $rs->save();
-    
+
         return redirect()->route('profile.index', $rs->id)->with('success', 'Profile updated successfully');
     }
 
