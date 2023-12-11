@@ -1,27 +1,35 @@
-<form>
-
+@if(Session::has('status'))
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+    alert("{{ Session::get('message') }}");
+    });
+    </script>
+@endif
+<form method="POST" action="{{ route('sandi.proses', $rs->id) }}">
+    @csrf
     <div class="row mb-3">
-      <label for="oldPassword" class="col-md-4 col-lg-3 col-form-label">Masukan Password Lama</label>
+      <label for="current_password" class="col-md-4 col-lg-3 col-form-label">Password Lama</label>
       <div class="col-md-8 col-lg-9">
-        <input name="password" type="password" class="form-control" id="oldPassword">
+        <input name="current_password" type="password" class="form-control" id="current_password">
       </div>
     </div>
-
+  
     <div class="row mb-3">
-      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Masukan Password Baru</label>
+      <label for="new_password" class="col-md-4 col-lg-3 col-form-label">Password Baru</label>
       <div class="col-md-8 col-lg-9">
-        <input name="newpassword" type="password" class="form-control" id="newPassword">
+        <input name="new_password" type="password" class="form-control" id="new_password">
       </div>
     </div>
-
+  
     <div class="row mb-3">
-      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Masukan Ulang Password Baru</label>
+      <label for="renew_password" class="col-md-4 col-lg-3 col-form-label">Ulangi Password Baru</label>
       <div class="col-md-8 col-lg-9">
-        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+        <input name="renew_password" type="password" class="form-control" id="renew_password">
       </div>
     </div>
-
+  
     <div class="text-center">
       <button type="submit" class="btn btn-primary">Ubah Password</button>
     </div>
   </form>
+  

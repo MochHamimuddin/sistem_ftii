@@ -6,6 +6,8 @@ use App\Models\Mitra;
 use App\Models\Program;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -88,9 +90,44 @@ class ProfileController extends Controller
         return redirect()->route('profile.index', $rs->id)->with('success', 'Profile updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function changePasswordForm($id)
+    {
+        $data = Program::all();
+        $rs = Mahasiswa::find($id);
+
+        if (!$rs) {
+            return abort(404);
+        }
+        $programs = Program::find($rs->program_id);
+        $mitra = Mitra::find($programs->mitra_id);
+
+        return view('profilepeserta.profile', compact('data','rs', 'programs', 'mitra'));
+    }
+
+    public function changePassword(Request $request, string $id)
+    {
+        $rs = Mahasiswa::findOrFail($id);
+
+        if (!$rs) {
+            return abort(404);
+        }
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+
+        if (!Hash::check($request->input('current_password'), $rs->password)) {
+            return redirect()->back()->with('error', 'Password saat ini salah.');
+        }
+
+        // Update password baru
+        $rs->password = Hash::make($request->input('new_password'));
+        $rs->save();
+        Session::flash('status','success');
+        Session::flash('message','Anda Berhasil Register, silahkan login');
+
+        return redirect()->route('profile.index', $rs->id);
+    }
     public function destroy(string $id)
     {
         //

@@ -40,16 +40,15 @@
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
-              </li>
-
+                <a href="{{ route('profile.edit', auth()->user()->id) }}" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</a>
+                </li>
               <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Administrasi</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
-              </li>
+                <a href="{{ route('sandi.form', auth()->user()->id) }}" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Ubah Password</a>
+                </li>
 
             </ul>
             <div class="tab-content pt-2">

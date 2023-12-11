@@ -45,4 +45,6 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/{id}/ubah-sandi', [ProfileController::class, 'changePasswordForm'])->name('sandi.form')->middleware('password.change');
+    Route::post('/profile/{id}/ubah-sandi', [ProfileController::class, 'changePassword'])->name('sandi.proses')->middleware('password.change');
 });

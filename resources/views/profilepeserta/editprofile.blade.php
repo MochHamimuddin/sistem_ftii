@@ -11,7 +11,6 @@
         </div>
       </div>
     </div>
-
     <div class="row mb-3">
       <label for="nim" class="col-md-4 col-lg-3 col-form-label">Nim</label>
       <div class="col-md-8 col-lg-9">
@@ -28,9 +27,17 @@
         <label for="jenis_kelamin" class="col-md-4 col-lg-3 col-form-label">Jenis Kelamin</label>
         <div class="col-md-8 col-lg-9">
             <select id="jenis_kelamin" name="jenis_kelamin" class="form-control form-control-lg" required>
-                <option value="" disabled selected>{{ $rs->jenis_kelamin}}</option>
-                <option value="L">Laki-laki</option>
-                <option value="P">Perempuan</option>
+                @if($rs->jenis_kelamin == 'L')
+                    <option value="L" selected>Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                @elseif($rs->jenis_kelamin == 'P')
+                    <option value="L">Laki-laki</option>
+                    <option value="P" selected>Perempuan</option>
+                @else
+                    <option value="{{ $rs->jenis_kelamin }}" selected>{{ $rs->jenis_kelamin }}</option>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                @endif
             </select>
         </div>
       </div>
@@ -38,15 +45,89 @@
         <label for="semester" class="col-md-4 col-lg-3 col-form-label">Semester</label>
         <div class="col-md-8 col-lg-9">
             <select id="semester" name="semester" class="form-control form-control-lg" required>
-                <option value="" disabled selected>{{ $rs->semester}}</option>
-                <option value="1(Ganjil)">1(Ganjil)</option>
-                <option value="2(Genap)">2(Genap)</option>
-                <option value="3(Ganjil)">3(Ganjil)</option>
-                <option value="4(Genap)">4(Genap)</option>
-                <option value="5(Ganjil)">5(Ganjil)</option>
-                <option value="6(Genap)">6(Genap)</option>
-                <option value="7(Ganjil)">7(Ganjil)</option>
-                <option value="8(Genap)">8(Genap)</option>
+                @if($rs->semester == '1(Ganjil)')
+                    <option value="1(Ganjil)" selected>1(Ganjil)</option>
+                    <option value="2(Genap)">2(Genap)</option>
+                    <option value="3(Ganjil)">3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @elseif($rs->semester == '2(Genap)')
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)" selected>2(Genap)</option>
+                    <option value="3(Ganjil)">3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @elseif($rs->semester == '3(Ganjil)')
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)" >2(Genap)</option>
+                    <option value="3(Ganjil)" selected>3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @elseif($rs->semester == '4(Genap)')
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)" >2(Genap)</option>
+                    <option value="3(Ganjil)" >3(Ganjil)</option>
+                    <option value="4(Genap)" selected>4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @elseif($rs->semester == '5(Ganjil)')
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)" >2(Genap)</option>
+                    <option value="3(Ganjil)" >3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)"selected>5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @elseif($rs->semester == '6(Genap)')
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)" >2(Genap)</option>
+                    <option value="3(Ganjil)" >3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)" selected>6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @elseif($rs->semester == '7(Ganjil)')
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)" >2(Genap)</option>
+                    <option value="3(Ganjil)" >3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)" selected>7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @elseif($rs->semester == '8(Genap)')
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)" >2(Genap)</option>
+                    <option value="3(Ganjil)" >3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)" selected>8(Genap)</option>
+                @else
+                    <option value="{{ $rs->semester }}" selected>{{ $rs->semester }}</option>
+                    <option value="1(Ganjil)">1(Ganjil)</option>
+                    <option value="2(Genap)">2(Genap)</option>
+                    <option value="3(Ganjil)">3(Ganjil)</option>
+                    <option value="4(Genap)">4(Genap)</option>
+                    <option value="5(Ganjil)">5(Ganjil)</option>
+                    <option value="6(Genap)">6(Genap)</option>
+                    <option value="7(Ganjil)">7(Ganjil)</option>
+                    <option value="8(Genap)">8(Genap)</option>
+                @endif
             </select>
         </div>
       </div>
@@ -72,9 +153,16 @@
       <label for="program_id" class="col-md-4 col-lg-3 col-form-label">Program</label>
       <div class="col-md-8 col-lg-9">
         <select id="program_id" name="program_id" class="form-control form-control-lg" required>
-            <option value="" disabled selected>{{ $programs->nama }}</option>
+            @if($programs->id == $rs->program_id)
+            <option value="{{ $programs->id }}" selected>{{ $programs->nama }}</option>
+            @else
+                <option value="{{ $programs->id }}">{{ $programs->nama }}</option>
+            @endif
+
             @foreach($data as $program)
-                <option value="{{ $program->id }}">{{ $program->nama }}</option>
+                @if($program->id != $programs->id)
+                    <option value="{{ $program->id }}">{{ $program->nama }}</option>
+                @endif
             @endforeach
         </select>
         </div>
