@@ -1,10 +1,3 @@
-@if(Session::has('status'))
-    <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-    alert("{{ Session::get('message') }}");
-    });
-    </script>
-@endif
 <form method="POST" action="{{ route('sandi.proses', $rs->id) }}">
     @csrf
     <div class="row mb-3">

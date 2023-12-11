@@ -36,7 +36,7 @@
             <ul class="nav nav-tabs nav-tabs-bordered">
 
               <li class="nav-item">
-                <a href="/overview" class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</a>
+                <a href="/profile/{id}" class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</a>
               </li>
 
               <li class="nav-item">
@@ -57,6 +57,13 @@
                 </div>
 
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                @if(Session::has('status') && Session::get('status') === 'success')
+                    <script>
+                        window.addEventListener('DOMContentLoaded', (event) => {
+                            alert("{{ Session::get('message') }}");
+                        });
+                    </script>
+                @endif
                 @include('profilepeserta.editprofile')
 
               </div>

@@ -103,31 +103,33 @@ class ProfileController extends Controller
 
         return view('profilepeserta.profile', compact('data','rs', 'programs', 'mitra'));
     }
-
-    public function changePassword(Request $request, string $id)
+    public function gantiPassword(Request $request, string $id)
     {
-        $rs = Mahasiswa::findOrFail($id);
+    $rs = Mahasiswa::find($id);
 
-        if (!$rs) {
-            return abort(404);
-        }
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
-        ]);
-
-        if (!Hash::check($request->input('current_password'), $rs->password)) {
-            return redirect()->back()->with('error', 'Password saat ini salah.');
-        }
-
-        // Update password baru
-        $rs->password = Hash::make($request->input('new_password'));
-        $rs->save();
-        Session::flash('status','success');
-        Session::flash('message','Anda Berhasil Register, silahkan login');
-
-        return redirect()->route('profile.index', $rs->id);
+    if (!$rs) {
+        return abort(404);
     }
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
+
+    if (!Hash::check($request->input('current_password'), $rs->password)) {
+        return redirect()->back()->with('error', 'Password saat ini salah.');
+    }
+
+    // Update password baru
+    $newPassword = $request->input('new_password');
+    $rs->password = Hash::make($newPassword);
+    $rs->save();
+
+    Session::flash('status', 'success');
+    Session::flash('message', 'Anda Berhasil Mengganti Password');
+
+    return redirect()->route('profile.index', $rs->id)->with('success', 'Password berhasil diubah');
+    }
+    
     public function destroy(string $id)
     {
         //
