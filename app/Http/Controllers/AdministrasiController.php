@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\Administrasi;
 use Illuminate\Http\Request;
 
 class AdministrasiController extends Controller
@@ -9,9 +11,31 @@ class AdministrasiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
         //
+        $id = auth()->user()->id;
+        $adm = Administrasi::all();
+        $rs = Mahasiswa::find($id);
+
+        if (!$rs) {
+            return abort(404);
+        }
+        $data = Mahasiswa::find($rs->mahasiswa_id);
+        return view('administrasi.adminis', compact('adm','data'));
+    }
+    public function status($id)
+    {
+        $adm = Administrasi::find($id);
+
+        if ($adm->status == 1) {
+            $adm->status = 0;
+        } else {
+            $adm->status = 1;
+        }
+        $adm->save();
+        alert()->success('Success','Status administrasi berhasil di update.');
+        return redirect()->back()->with('success', 'Status administrasi updated successfully.');
     }
 
     /**

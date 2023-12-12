@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Program;
+use App\Models\Administrasi;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -16,6 +17,9 @@ class Mahasiswa extends Authenticatable
     ];
     public function Kegiatan (){
         return $this->belongsTo(Program::class,'program_id');
+    }
+    public function Adm (){
+        return $this->hasMany(Administrasi::class,'mahasiswa_id');
     }
     protected $hidden = [
         'remember_token'

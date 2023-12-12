@@ -2,9 +2,8 @@
 @section('content')
 
 <div class="pagetitle">
-    <h1>Data Dosen Pembimbing</h1>
+    <h1>Data Administrasi {{  auth()->user()->name }} </h1>
   </div><!-- End Page Title -->
-
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
@@ -24,11 +23,18 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($adm as $administrasi)
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Brandon Jacob</td>
-                  <td>Designer</td>
-                  <td>Designer</td>
+                  <th scope="row">{{ $loop->iteration }}</th>
+                  <td>{{ $administrasi->nama }}</td>
+                  <td>
+                    @if($administrasi->status == 1)
+                        <a href="{{ route('adm.status', ['id' => $administrasi->id]) }}" class="btn btn-success">Aktif</a>
+                            @else
+                        <a href="{{ route('adm.status', ['id' => $administrasi->id]) }}" class="btn btn-danger">Non Aktif</a>
+                        @endif
+                  </td>
+                  <td>{{ $administrasi->tanggal }}</td>
                   <td><a class="btn btn-primary" href="#">Upload Berkas</a></td>
                   <td>
                     <a class="btn btn-primary" href="#"><i class="bi bi-search"></i></a>
@@ -48,6 +54,7 @@
                       <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i></a>
                     </td>
                   </tr>
+                  @endforeach
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
