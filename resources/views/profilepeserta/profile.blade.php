@@ -82,4 +82,16 @@
       </div>
     </div>
   </section>
+  <script type="text/javascript">
+  var readFoto = function(event){
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function(){
+        var dataURL = render.result;
+        var output = document.getElementById('output');
+        output.src = dataURL
+    };
+    reader.readAsDataURL(input.file[0]);
+  };
+  </script>
 @endsection

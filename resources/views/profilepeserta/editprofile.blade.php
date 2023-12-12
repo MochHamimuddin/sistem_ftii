@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('profile.update', $rs->id) }}">
+<form method="POST" action="{{ route('profile.update', $rs->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="row mb-3">
@@ -6,7 +6,14 @@
       <div class="col-md-8 col-lg-9">
         <img src="{{ asset('admin/img/profile-img.jpg')}}">
         <div class="pt-2">
-          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+          <input name="foto" type="file" class="form-control" id="foto" onchange="readFoto(event)" value="{{ $rs->foto }}"
+          class="btn btn-primary btn-sm" @error('foto') is-inavalid @enderror><i class="bi bi-upload"></i>
+          <img id="output" style="width: 100px;">
+          @error('foto')
+          <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+          </span>
+          @enderror
           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
         </div>
       </div>
