@@ -4,17 +4,17 @@
     <div class="row mb-3">
       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
       <div class="col-md-8 col-lg-9">
-        <img src="{{ asset('admin/img/profile-img.jpg')}}">
+        <img src="{{ asset('foto_peserta/img/'.$rs->foto) }}">
         <div class="pt-2">
           <input name="foto" type="file" class="form-control" id="foto" onchange="readFoto(event)" value="{{ $rs->foto }}"
-          class="btn btn-primary btn-sm" @error('foto') is-inavalid @enderror><i class="bi bi-upload"></i>
+          class="btn btn-primary btn-sm" @error('foto') is-inavalid @enderror>
+          <i>/*nb : ukuran foto 120 x 120</i>
           <img id="output" style="width: 100px;">
           @error('foto')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
           </span>
           @enderror
-          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
         </div>
       </div>
     </div>

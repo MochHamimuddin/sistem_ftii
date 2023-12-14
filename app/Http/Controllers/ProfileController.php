@@ -8,7 +8,9 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Nette\Utils\Image;
+use Illuminate\Support\Facades\File;
+use Imagine\Image\Box;
+use Imagine\Gd\Imagine;
 
 class ProfileController extends Controller
 {
@@ -72,21 +74,11 @@ class ProfileController extends Controller
     }
     public function update(Request $request, string $id)
     {
-        $this->validate($request,[
-            'foto'=> 'nullable|mimes:jpg,jpeg,svg,png'
-        ]);
         $rs = Mahasiswa::findOrFail($id);
 
         if (!$rs) {
             return abort(404);
         }
-        $file = $request->file('foto');
-        $name = 'FTII'.date('Ymhdis').'.'.$request->file('foto')->getClientOriginalExtension();
-        $resize_foto = Image::make($file->getRealPath());
-        $resize_foto->resize(200,200,function($constraint){
-           $constraint->aspectRatio();
-        })->save('foto_peserta'.$name);
-        $rs->save();
 
         $rs->nim = $request->input('nim');
         $rs->name = $request->input('name');
@@ -96,7 +88,30 @@ class ProfileController extends Controller
         $rs->email = $request->input('email');
         $rs->telpon = $request->input('telpon');
         $rs->program_id = $request->input('program_id');
-        $rs->foto = $name;
+        if($request->hasFile('foto')){
+            $file = $request->file('foto');
+            //Mencari File Lama dan menghapus file lama, jika  file lama = siska.png(default) maka file lama tidak di hapus
+            $des = 'admin/images/'.$rs->foto;
+            if (File::exists($des) && $rs->foto != 'siska.png') {
+                File::delete($des);
+            }
+            //validasi foto
+            $file = $request->file('foto');
+            $request->validate([
+                'foto' => 'max:2048|mimes:jpg,jpeg,svg,png',
+            ]);
+            //di masukan ke dalam direktori admin/images/sesuai nama file yang di masukan
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('foto_peserta/img'),$fileName);
+            $rs->foto = $fileName;
+
+            $filePath = public_path('foto_peserta/img/' . $fileName);
+            $imagine = new Imagine();
+            $image = $imagine->open($filePath);
+            $resizedImage = $image->resize(new Box(120, 120));
+            $resizedImage->save($filePath);
+        }
+        $rs->save();
 
         return redirect()->route('profile.index', $rs->id)->with('success', 'Profile updated successfully');
     }

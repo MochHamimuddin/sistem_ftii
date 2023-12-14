@@ -20,7 +20,7 @@
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-            <img src="{{ asset('admin/img/profile-img.jpg') }}" class="rounded-circle">
+            <img src="{{ asset('foto_peserta/img/'.$rs->foto) }}"class="rounded-circle">
             <h2>{{ auth()->user()->name }}</h2>
             <h3>{{ $programs->nama}}</h3>
           </div>
