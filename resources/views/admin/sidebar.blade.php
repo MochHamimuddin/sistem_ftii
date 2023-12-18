@@ -1,7 +1,7 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
+        @if(auth()->user()->role=="peserta")
       <li class="nav-item">
         <a class="nav-link collapsed" href="/dashboard">
           <i class="bi bi-grid"></i>
@@ -12,6 +12,43 @@
         <a class="nav-link collapsed" href="/profile/{id}">
           <i class="bi bi-people"></i>
           <span>Profile</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/administrasi/{id}">
+          <i class="bi bi-building-down"></i>
+          <span>Administrasi</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="bi bi-calendar-week"></i>
+          <span>Timeline Kegiatan</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="bi bi-bookmark-plus"></i>
+          <span>Penilaian Konversi</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="bi bi-folder"></i>
+          <span>Final Project</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="bi bi-gear"></i>
+          <span>Pengaturan</span>
+        </a>
+      </li>
+      @elseif(auth()->user()->role=="admin")
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/dashboard">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
@@ -66,6 +103,7 @@
           <span>Pengaturan</span>
         </a>
       </li>
+      @endif
       <li class="nav-item">
         <a class="nav-link collapsed" href="/logout ">
           <i class="bi bi-box-arrow-in-right"></i>
