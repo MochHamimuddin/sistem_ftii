@@ -67,7 +67,7 @@
             </a>
           </li>
           <li>
-            <a href="/peserta">
+            <a href="/datapeserta">
               <i class="bi bi-circle"></i><span>Data Peserta</span>
             </a>
           </li>

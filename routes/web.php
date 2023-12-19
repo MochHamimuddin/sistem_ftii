@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\AdministrasiController;
 
 /*
@@ -48,6 +49,10 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/{id}/ubah-sandi', [ProfileController::class, 'changePasswordForm'])->name('sandi.form')->middleware('password.change');
     Route::post('/profile/{id}', [ProfileController::class, 'gantiPassword'])->name('sandi.proses')->middleware('password.change');
+    Route::get('/datapeserta', [MahasiswaController::class, 'index'])->name('mhs.index');
+    Route::get('/datapeserta/{id}', [MahasiswaController::class, 'show'])->name('mhs.show');
+    Route::get('/datapeserta-edit/{id}', [MahasiswaController::class, 'edit'])->name('mhs.edit');
+    Route::put('/datapeserta-edit/{id}', [MahasiswaController::class, 'update'])->name('mhs.update');
     Route::get('/administrasi', [AdministrasiController::class, 'index'])->name('adm.index');
     Route::get('/administrasi/{id}/status', [AdministrasiController::class, 'status'])->name('adm.status');
 });

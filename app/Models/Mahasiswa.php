@@ -18,6 +18,10 @@ class Mahasiswa extends Authenticatable
     public function Kegiatan (){
         return $this->belongsTo(Program::class,'program_id');
     }
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
     public function Adm (){
         return $this->hasMany(Administrasi::class,'mahasiswa_id');
     }
