@@ -11,18 +11,15 @@ class AdministrasiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
-        //
-        $id = auth()->user()->id;
         $adm = Administrasi::all();
-        $rs = Mahasiswa::find($id);
+        $rs = Mahasiswa::all();
 
         if (!$rs) {
             return abort(404);
         }
-        $data = Mahasiswa::find($rs->mahasiswa_id);
-        return view('administrasi.adminis', compact('adm','data'));
+        return view('administrasi.adminis', compact('adm','rs'));
     }
     public function status($id)
     {

@@ -15,7 +15,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/administrasi/{id}">
+        <a class="nav-link collapsed" href="/administrasi">
           <i class="bi bi-building-down"></i>
           <span>Administrasi</span>
         </a>
@@ -74,7 +74,7 @@
         </ul>
       </li><!-- End Components Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/administrasi/{id}">
+        <a class="nav-link collapsed" href="/administrasi">
           <i class="bi bi-building-down"></i>
           <span>Administrasi</span>
         </a>

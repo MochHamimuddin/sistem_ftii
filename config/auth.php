@@ -40,13 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'mahasiswa'=>[
-            'driver' => 'session',
-            'provider' => 'mahasiswas'
-        ],
         'user'=>[
             'driver' => 'session',
             'provider' => 'users'
+        ],
+        'mahasiswa'=>[
+            'driver' => 'session',
+            'provider' => 'mahasiswas'
         ],
     ],
 
