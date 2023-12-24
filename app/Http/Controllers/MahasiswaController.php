@@ -7,6 +7,8 @@ use Imagine\Image\Box;
 use App\Models\Program;
 use Imagine\Gd\Imagine;
 use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
@@ -37,17 +39,58 @@ class MahasiswaController extends Controller
 }
 
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('mahasiswa.create');
+        $programs = Program::all();
+        $mhs = Mahasiswa::all();
+        return view('masterdata.peserta_create',compact('programs','mhs'));
     }
 
     public function store(Request $request)
     {
-        $mhs = new Mahasiswa();
-        $mhs->fill($request->all());
-        $mhs->save();
+        $request->validate([
+            'nim'=>'required|unique:mahasiswa,nim',
+            'name'=>'required',
+            'jenis_kelamin'=>'required',
+            'semester'=>'required',
+            'alamat' => 'required',
+            'email'=>'required|unique:mahasiswa,email',
+            'telpon' => 'required',
+            'password' => 'required',
+             'program_id' => 'required|exists:program,id'
 
+        ],[
+            'nim.required' => 'Mohon isi kolom NIM.',
+            'nim.unique' => 'Nim sudah terdaftar.',
+            'name.required' => 'Mohon isi kolom Nama.',
+            'jenis_kelamin.required' => 'Mohon pilih Jenis Kelamin.',
+            'semester.required' => 'Mohon isi kolom Semester.',
+            'alamat.required' => 'Mohon isi kolom Alamat.',
+            'email.required' => 'Mohon isi kolom Email.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'telpon.required' => 'Mohon isi kolom Telpon.',
+            'password.required' => 'Mohon isi kolom Password.',
+            'program_id.required' => 'Mohon pilih Program.',
+            'program_id.exists' => 'Program tidak valid.',
+
+        ]);
+        $data = [
+            'nim'=>$request->nim,
+            'name'=>$request->name,
+            'jenis_kelamin'=>$request->jenis_kelamin,
+            'semester'=>$request->semester,
+            'alamat'=>$request->alamat,
+            'email'=>$request->email,
+            'telpon'=>$request->telpon,
+            'password'=>hash::make($request->password),
+            'foto' => '1.png',
+            'program_id'=>$request->program_id,
+            'remember_token' => Str::random(60),
+        ];
+        Mahasiswa::create($data);
+        Session::flash('status','success');
+       Session::flash('message','Anda Berhasil Register, silahkan login');
         return redirect()->route('mhs.index');
     }
     public function edit($id)
@@ -89,10 +132,11 @@ class MahasiswaController extends Controller
 
         return redirect()->route('mhs.show', $id)->with('success', 'Data mahasiswa berhasil diubah.');
     }
-    public function destroy(Mahasiswa $mhs)
+    public function destroy(String $id)
     {
+        $mhs = Mahasiswa::findOrFail($id);
         $mhs->delete();
-
-        return redirect()->route('mhs.index');
+        alert()->success('Data Pelanggan Berhasil Di Edit');
+        return redirect()->route('mhs.index')->with('success', 'Data Pelanggan berhasil dihapus');
     }
 }

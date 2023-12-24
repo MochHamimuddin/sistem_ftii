@@ -11,6 +11,9 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title"></h5>
+          <div>
+          <a href="/datapeserta_create" class="btn btn-outline-primary">Tambah Data</a>
+          </div>
           <table class="table datatable">
             <thead>
               <tr>
@@ -31,7 +34,12 @@
                   <td>
                     <a class="btn btn-primary" href="{{ route('mhs.show', $data->id) }}"><i class="bi bi-search"></i></a>
                     <a class="btn btn-warning" href="{{ route('mhs.edit', $data->id) }}"><i class="bi bi-pencil-square"></i></a>
-                    <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i></a>
+                    <form action="{{ route('mhs.delete', $data->id) }}" method="POST" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i></button>
+                    </form>
                   </td>
                 </tr>
               @endforeach

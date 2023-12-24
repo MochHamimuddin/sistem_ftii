@@ -53,6 +53,9 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/datapeserta/{id}', [MahasiswaController::class, 'show'])->name('mhs.show');
     Route::get('/datapeserta-edit/{id}', [MahasiswaController::class, 'edit'])->name('mhs.edit');
     Route::put('/datapeserta-edit/{id}', [MahasiswaController::class, 'update'])->name('mhs.update');
+    Route::get('/datapeserta_create', [MahasiswaController::class, 'create'])->name('mhs_create.form');
+    Route::post('/datapeserta_proses', [MahasiswaController::class, 'store'])->name('mhs_create.proses');
+    Route::delete('/deletedata/{id}', [MahasiswaController::class, 'destroy'])->name('mhs.delete');
     Route::get('/administrasi', [AdministrasiController::class, 'index'])->name('adm.index');
     Route::get('/administrasi/{id}/status', [AdministrasiController::class, 'status'])->name('adm.status');
 });
