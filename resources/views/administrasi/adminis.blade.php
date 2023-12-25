@@ -2,12 +2,11 @@
 @section('content')
 
 <div class="pagetitle">
-    <h1>Data Administrasi {{  auth()->user()->name }} </h1>
+    <h1>Data Administrasi</h1>
   </div><!-- End Page Title -->
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
-
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"></h5>
@@ -42,23 +41,9 @@
                     <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i></a>
                   </td>
                 </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>Designer</td>
-                    <td><a class="btn btn-primary" href="#">Upload Berkas</a></td>
-                    <td>
-                      <a class="btn btn-primary" href="#"><i class="bi bi-search"></i></a>
-                      <a class="btn btn-warning" href="#"><i class="bi bi-pencil-square"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i></a>
-                    </td>
-                  </tr>
                   @endforeach
               </tbody>
             </table>
-            <!-- End Table with stripped rows -->
-
           </div>
         </div>
 
