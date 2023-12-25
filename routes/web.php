@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\MitraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
@@ -56,6 +58,19 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/datapeserta_create', [MahasiswaController::class, 'create'])->name('mhs_create.form');
     Route::post('/datapeserta_proses', [MahasiswaController::class, 'store'])->name('mhs_create.proses');
     Route::delete('/deletedata/{id}', [MahasiswaController::class, 'destroy'])->name('mhs.delete');
+    Route::get('/datadosen', [DosenController::class, 'index'])->name('dosen.index');
+    Route::get('/dospem_create', [DosenController::class, 'create'])->name('dosen_create.form');
+    Route::post('/datadosen_proses', [DosenController::class, 'store'])->name('dosen_create.proses');
+    Route::get('/datadosen/{id}', [DosenController::class, 'show'])->name('dosen.show');
+    Route::get('/datadosen-edit/{id}', [DosenController::class, 'edit'])->name('dosen.edit');
+    Route::put('/datadosen-edit/{id}', [DosenController::class, 'update'])->name('dosen.update');
+    Route::delete('/deletedosen/{id}', [DosenController::class, 'destroy'])->name('dosen.delete');
+    Route::get('/datamitra', [MitraController::class, 'index'])->name('mitra.index');
+    Route::get('/datamitra_create', [MitraController::class, 'create'])->name('mitra_create.form');
+    Route::post('/datamitra_proses', [MitraController::class, 'store'])->name('mitra_create.proses');
+    Route::get('/datamitra-edit/{id}', [MitraController::class, 'edit'])->name('mitra.edit');
+    Route::put('/datamitra-edit/{id}', [MitraController::class, 'update'])->name('mitra.update');
+    Route::delete('/deletemitra/{id}', [MitraController::class, 'destroy'])->name('mitra.delete');
     Route::get('/administrasi', [AdministrasiController::class, 'index'])->name('adm.index');
     Route::get('/administrasi/{id}/status', [AdministrasiController::class, 'status'])->name('adm.status');
 });

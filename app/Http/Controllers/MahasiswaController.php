@@ -136,7 +136,7 @@ class MahasiswaController extends Controller
     {
         $mhs = Mahasiswa::findOrFail($id);
         $mhs->delete();
-        alert()->success('Data Pelanggan Berhasil Di Edit');
-        return redirect()->route('mhs.index')->with('success', 'Data Pelanggan berhasil dihapus');
+        alert()->success('Data Peserta Berhasil Di Edit');
+        return redirect()->route('mhs.index')->with('success', 'Data Peserta berhasil dihapus');
     }
 }

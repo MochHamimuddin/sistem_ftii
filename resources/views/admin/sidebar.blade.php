@@ -57,12 +57,12 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="/mitra">
+            <a href="/datamitra">
               <i class="bi bi-circle"></i><span>Data Mitra</span>
             </a>
           </li>
           <li>
-            <a href="/dospem">
+            <a href="/datadosen">
               <i class="bi bi-circle"></i><span>Data Dospem</span>
             </a>
           </li>

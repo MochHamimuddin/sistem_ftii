@@ -12,48 +12,36 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"></h5>
+            <div>
+                <a href="/dospem_create" class="btn btn-outline-primary">Tambah Data</a>
+            </div>
             <table class="table datatable">
               <thead>
                 <tr>
                   <th scope="col">No</th>
                   <th scope="col">NIDN</th>
                   <th scope="col">Nama</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Password</th>
-                  <th scope="col">No telp</th>
-                  <th scope="col">Program</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
+                @foreach ($dosen as $data)
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Brandon Jacob</td>
-                  <td>Designer</td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>Designer</td>
-                  <td>MBKM</td>
+                  <th scope="row">{{ $loop->iteration }}</th>
+                  <td>{{ $data->kode_dosen }}</td>
+                  <td>{{ $data->nama }}</td>
                   <td>
-                    <a class="btn btn-primary" href="#"><i class="bi bi-search"></i></a>
-                    <a class="btn btn-warning" href="#"><i class="bi bi-pencil-square"></i></a>
-                    <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i></a>
+                    <a class="btn btn-primary" href="{{ route('dosen.show', $data->id) }}"><i class="bi bi-search"></i></a>
+                    <a class="btn btn-warning" href="{{ route('dosen.edit', $data->id) }}"><i class="bi bi-pencil-square"></i></a>
+                    <form action="{{ route('dosen.delete', $data->id) }}" method="POST" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i></button>
+                    </form>
                   </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Brandon Jacob</td>
-                    <td>Designer</td>
-                    <td>Designer</td>
-                    <td>28</td>
-                    <td>Designer</td>
-                    <td>MBKM</td>
-                    <td>
-                      <a class="btn btn-primary" href="#"><i class="bi bi-search"></i></a>
-                      <a class="btn btn-warning" href="#"><i class="bi bi-pencil-square"></i></a>
-                      <a class="btn btn-danger" href="#"><i class="bi bi-trash"></i></a>
-                    </td>
-                  </tr>
+                @endforeach
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
