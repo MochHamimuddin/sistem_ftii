@@ -74,7 +74,7 @@
         </ul>
       </li><!-- End Components Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/administrasi">
+        <a class="nav-link collapsed" href="/kategori_adm">
           <i class="bi bi-building-down"></i>
           <span>Administrasi</span>
         </a>

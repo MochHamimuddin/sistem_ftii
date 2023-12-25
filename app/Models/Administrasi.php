@@ -9,12 +9,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Administrasi extends Model
 {
     use HasFactory;
-    protected $table = 'administrasi';
+    protected $table = 'berkas_adm';
     protected $fillable = [
-        'nama','status','tanggal','berkas','mahasiswa_id'
+        'mahasiswa_id','kategori_adm_id','berkas'
     ];
-    public function Adm (){
-        return $this->belongsTo(Mahasiswa::class,'mahasiswa_id');
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class);
+    }
+
+    public function kategori_adm()
+    {
+        return $this->belongsTo(KategoriAdm::class);
     }
 
 }

@@ -22,9 +22,11 @@ class Mahasiswa extends Authenticatable
     {
         return $this->belongsTo(Program::class);
     }
-    public function Adm (){
-        return $this->hasMany(Administrasi::class,'mahasiswa_id');
+    public function kategori_adm()
+    {
+        return $this->belongsToMany(KategoriAdm::class, 'mahasiswa_id', 'kategori_adm_id');
     }
+
     protected $hidden = [
         'remember_token'
     ];

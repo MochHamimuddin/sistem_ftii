@@ -16,25 +16,25 @@
                   <th scope="col">No</th>
                   <th scope="col">Jenis Administrasi</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Tanggal</th>
-                  <th scope="col">Berkas</th>
+                  <th scope="col">Tanggal Mulai</th>
+                  <th scope="col">Deadline</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($adm as $administrasi)
+                @foreach ($kategori_adm as $administrasi)
                 <tr>
                   <th scope="row">{{ $loop->iteration }}</th>
                   <td>{{ $administrasi->nama }}</td>
                   <td>
                     @if($administrasi->status == 1)
-                        <a href="{{ route('adm.status', ['id' => $administrasi->id]) }}" class="btn btn-success">Aktif</a>
+                        <a href="{{ route('kategori_adm.status', ['id' => $administrasi->id]) }}" class="btn btn-success">Aktif</a>
                             @else
-                        <a href="{{ route('adm.status', ['id' => $administrasi->id]) }}" class="btn btn-danger">Non Aktif</a>
+                        <a href="{{ route('kategori_adm.status', ['id' => $administrasi->id]) }}" class="btn btn-danger">Non Aktif</a>
                         @endif
                   </td>
-                  <td>{{ $administrasi->tanggal }}</td>
-                  <td><a class="btn btn-primary" href="#">Upload Berkas</a></td>
+                  <td>{{ $administrasi->tanggal_mulai }}</td>
+                  <td>{{ $administrasi->tanggal_akhir }}</td>
                   <td>
                     <a class="btn btn-primary" href="#"><i class="bi bi-search"></i></a>
                     <a class="btn btn-warning" href="#"><i class="bi bi-pencil-square"></i></a>

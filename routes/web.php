@@ -7,6 +7,7 @@ use App\Http\Controllers\MitraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\KategoriAdmController;
 use App\Http\Controllers\AdministrasiController;
 
 /*
@@ -71,6 +72,8 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/datamitra-edit/{id}', [MitraController::class, 'edit'])->name('mitra.edit');
     Route::put('/datamitra-edit/{id}', [MitraController::class, 'update'])->name('mitra.update');
     Route::delete('/deletemitra/{id}', [MitraController::class, 'destroy'])->name('mitra.delete');
-    Route::get('/administrasi', [AdministrasiController::class, 'index'])->name('adm.index');
-    Route::get('/administrasi/{id}/status', [AdministrasiController::class, 'status'])->name('adm.status');
+    Route::get('/kategori_adm', [KategoriAdmController::class, 'index'])->name('kategori_adm.index');
+    Route::get('/kategori_adm/{id}/status', [KategoriAdmController::class, 'status'])->name('kategori_adm.status');
+
+
 });
