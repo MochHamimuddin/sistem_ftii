@@ -24,7 +24,11 @@ class Mahasiswa extends Authenticatable
     }
     public function kategori_adm()
     {
-        return $this->belongsToMany(KategoriAdm::class, 'mahasiswa_id', 'kategori_adm_id');
+        return $this->belongsToMany(KategoriAdm::class, 'berkas_adm', 'mahasiswa_id', 'kategori_adm_id');
+    }
+    public function administrasis()
+    {
+        return $this->hasMany(Administrasi::class, 'mahasiswa_id');
     }
 
     protected $hidden = [

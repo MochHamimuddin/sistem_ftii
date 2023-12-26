@@ -11,16 +11,16 @@ class Administrasi extends Model
     use HasFactory;
     protected $table = 'berkas_adm';
     protected $fillable = [
-        'mahasiswa_id','kategori_adm_id','berkas'
+        'mahasiswa_id','kategori_adm_id','tanggal_pengumpulan','berkas','keterangan'
     ];
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class,'id');
     }
 
     public function kategori_adm()
     {
-        return $this->belongsTo(KategoriAdm::class);
+        return $this->belongsTo(KategoriAdm::class,'id');
     }
 
 }

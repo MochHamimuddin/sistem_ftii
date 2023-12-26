@@ -2,63 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Mahasiswa;
+use App\Models\KategoriAdm;
+use App\Models\Administrasi;
 use Illuminate\Http\Request;
 
 class AdministrasiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $administrasi = Administrasi::with('mahasiswa', 'kategori_adm')->get();
+        $mahasiswa = Mahasiswa::all();
+        $kategoriAdm = KategoriAdm::all();
+
+        return view('administrasi.adminis_peserta', compact('administrasi', 'mahasiswa', 'kategoriAdm'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    public function upload(Request $request, $kategori_adm_id)
+{
+    $request->validate([
+        'berkas' => 'required|mimes:pdf|max:2048'
+    ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    $mahasiswa_id = auth()->user()->id;
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    $file = $request->file('berkas');
+    $fileName = time() . '_' . $file->getClientOriginalName();
+    $filePath = $file->storeAs('berkas_adm', $fileName);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    $waktuWIB = Carbon::now('Asia/Jakarta');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    Administrasi::create([
+        'mahasiswa_id' => $mahasiswa_id,
+        'kategori_adm_id' => $kategori_adm_id,
+        'tanggal_pengumpulan' => $waktuWIB,
+        'berkas' => $filePath,
+        'keterangan' => '0',
+    ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
+    return redirect()->back()->with('success', 'Berkas berhasil diunggah!');
+}
+
 }

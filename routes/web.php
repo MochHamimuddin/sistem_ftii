@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdmAdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KategoriAdmController;
@@ -72,8 +73,20 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/datamitra-edit/{id}', [MitraController::class, 'edit'])->name('mitra.edit');
     Route::put('/datamitra-edit/{id}', [MitraController::class, 'update'])->name('mitra.update');
     Route::delete('/deletemitra/{id}', [MitraController::class, 'destroy'])->name('mitra.delete');
-    Route::get('/kategori_adm', [KategoriAdmController::class, 'index'])->name('kategori_adm.index');
-    Route::get('/kategori_adm/{id}/status', [KategoriAdmController::class, 'status'])->name('kategori_adm.status');
-
+    Route::get('/kategori_adm/{id}', [AdministrasiController::class, 'show'])->name('adm.show');
+    Route::get('/administrasi', [AdministrasiController::class, 'index'])->name('administrasi.index');
+    Route::post('/administrasi/upload/{kategori_adm_id}', [AdministrasiController::class, 'upload'])->name('administrasi.upload');
+    Route::get('/view-administrasi', [AdmAdminController::class, 'viewAdministrasi'])->name('view_administrasi');
+    Route::get('/kategori-adm', [AdmAdminController::class, 'index'])->name('kategori_adm.index');
+    Route::get('/kategori-adm/{id}/status', [AdmAdminController::class, 'status'])->name('kategori_adm.status');
+    Route::get('/view-file/{id}', [AdmAdminController::class, 'viewFile'])->name('view_file');
+    Route::get('/kategori-adm/{id}/detail', [AdmAdminController::class, 'detailAdminis'])->name('adminis.detail');
+    Route::get('/kategori-adm/create', [AdmAdminController::class, 'create'])->name('kategori_adm.create');
+    Route::post('/kategori-adm/store', [AdmAdminController::class, 'store'])->name('kategori_adm.store');
+    Route::get('/kategori_adm/{id}/edit', [AdmAdminController::class, 'edit'])->name('kategori_adm.edit');
+    Route::put('/kategori_adm/{id}', [AdmAdminController::class, 'update'])->name('kategori_adm.update');
+    Route::delete('/kategori_adm/{id}', [AdmAdminController::class, 'destroy'])->name('kategori_adm.destroy');
+    Route::put('/kategori-adm/{id}/approve', [AdmAdminController::class, 'approveBerkas'])->name('administrasi.approve');
+    Route::get('/kategori-adm/{id}/keterangan', [AdmAdminController::class, 'Keterangan'])->name('kategori_adm.keterangan');
 
 });

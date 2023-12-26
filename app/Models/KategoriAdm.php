@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KategoriAdm extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $table = 'kategori_adm';
 
@@ -16,6 +17,6 @@ class KategoriAdm extends Model
     ];
     public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa::class, 'kategori_adm_id', 'id');
+        return $this->hasMany(Mahasiswa::class, 'kategori_adm_id');
     }
 }
