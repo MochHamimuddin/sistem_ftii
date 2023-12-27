@@ -21,7 +21,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/kegiatan_peserta_create">
           <i class="bi bi-calendar-week"></i>
           <span>Timeline Kegiatan</span>
         </a>
@@ -80,7 +80,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/kegiatan">
           <i class="bi bi-calendar-week"></i>
           <span>Timeline Kegiatan</span>
         </a>

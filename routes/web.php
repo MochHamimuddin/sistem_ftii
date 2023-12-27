@@ -6,10 +6,12 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdmAdminController;
+use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KategoriAdmController;
 use App\Http\Controllers\AdministrasiController;
+use App\Http\Controllers\KegiatanPesertaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,5 +90,15 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::delete('/kategori_adm/{id}', [AdmAdminController::class, 'destroy'])->name('kategori_adm.destroy');
     Route::put('/kategori-adm/{id}/approve', [AdmAdminController::class, 'approveBerkas'])->name('administrasi.approve');
     Route::get('/kategori-adm/{id}/keterangan', [AdmAdminController::class, 'Keterangan'])->name('kategori_adm.keterangan');
+    Route::get('/kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
+    Route::get('/kegiatan/create', [KegiatanController::class, 'create'])->name('kegiatan.create');
+    Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('kegiatan.store');
+    Route::get('/kegiatan/{kegiatan}', [KegiatanController::class, 'show'])->name('kegiatan.show');
+    Route::get('/kegiatan/{kegiatan}/edit', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
+    Route::put('/kegiatan/{kegiatan}', [KegiatanController::class, 'update'])->name('kegiatan.update');
+    Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy'])->name('kegiatan.destroy');
+    Route::get('/kegiatan_peserta_create', [KegiatanPesertaController::class, 'create'])->name('kegiatan_peserta.create');
+    Route::post('/kegiatan_peserta', [KegiatanPesertaController::class, 'store'])->name('kegiatan_peserta.store');
+    Route::get('/detail_kegiatan', [KegiatanPesertaController::class, 'showAll'])->name('kegiatan_peserta.showAll');
 
 });
