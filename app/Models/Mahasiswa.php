@@ -15,12 +15,12 @@ class Mahasiswa extends Authenticatable
     protected $fillable = [
         'nim','name','jenis_kelamin','semester','alamat', 'email','telpon', 'password','role', 'foto','program_id',
     ];
-    public function Kegiatan (){
-        return $this->belongsTo(Program::class,'program_id');
+    public function Kegiatans (){
+        return $this->hasMany(Kegiatan::class,'mahasiswa_id');
     }
     public function program()
     {
-        return $this->belongsTo(Program::class);
+        return $this->belongsTo(Program::class,'program_id');
     }
     public function kategori_adm()
     {

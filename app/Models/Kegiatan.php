@@ -27,4 +27,8 @@ class Kegiatan extends Model
     {
         return $this->belongsTo(Program::class, 'program_id');
     }
+    public function logbooks()
+{
+    return $this->hasMany(Logbook::class, 'kegiatan_id');
+}
 }

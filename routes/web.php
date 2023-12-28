@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MitraController;
+use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdmAdminController;
 use App\Http\Controllers\KegiatanController;
@@ -100,5 +101,12 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/kegiatan_peserta_create', [KegiatanPesertaController::class, 'create'])->name('kegiatan_peserta.create');
     Route::post('/kegiatan_peserta', [KegiatanPesertaController::class, 'store'])->name('kegiatan_peserta.store');
     Route::get('/detail_kegiatan', [KegiatanPesertaController::class, 'showAll'])->name('kegiatan_peserta.showAll');
+    Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
+    Route::get('/logbook/{id}/form', [LogbookController::class, 'showLogbookForm'])->name('logbook.form');
+    Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
+    Route::post('/logbook/store', [LogbookController::class, 'storeWeeklyLogbook'])->name('logbook.store');
+    Route::get('/logbook/{id}/edit', [LogbookController::class, 'edit'])->name('logbook.edit');
+    Route::put('/logbook/{id}/update', [LogbookController::class, 'update'])->name('logbook.update');
+    Route::delete('/logbook/{id}/delete', [LogbookController::class, 'destroy'])->name('logbook.destroy');
 
 });

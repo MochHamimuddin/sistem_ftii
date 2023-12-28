@@ -27,6 +27,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('logbook.create')}}">
+          <i class="bi bi-calendar-week"></i>
+          <span>Logbook</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="bi bi-bookmark-plus"></i>
           <span>Penilaian Konversi</span>
@@ -83,6 +89,12 @@
         <a class="nav-link collapsed" href="/kegiatan">
           <i class="bi bi-calendar-week"></i>
           <span>Timeline Kegiatan</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('logbook.index')}}">
+          <i class="bi bi-calendar-week"></i>
+          <span>Logbook</span>
         </a>
       </li>
       <li class="nav-item">
