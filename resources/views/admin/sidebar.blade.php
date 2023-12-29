@@ -92,7 +92,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('logbook.index')}}">
+        <a class="nav-link collapsed" href="/data_logbook">
           <i class="bi bi-calendar-week"></i>
           <span>Logbook</span>
         </a>

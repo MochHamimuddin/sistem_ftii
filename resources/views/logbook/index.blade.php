@@ -1,37 +1,50 @@
-@extends('admin.index') <!-- Sesuaikan dengan layout admin yang dimiliki -->
-
+@extends('admin.index')
 @section('content')
-    <h1>Daftar Logbook</h1>
-    <a href="{{ route('logbook.create') }}">Tambah Logbook Baru</a> <!-- Tombol untuk tambah data baru -->
-    <table>
-        <thead>
-            <tr>
-                <th>Nama Mahasiswa</th>
-                <th>Nama Dosen</th>
-                <th>Kegiatan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($logbooks as $logbook)
-                <tr>
-                    <td>{{ $logbook->mahasiswa->name }}</td>
-                    <td>{{ $logbook->dosen->nama }}</td>
-                    <td>{{ $logbook->kegiatan->nama }}</td>
-                    <td>
-                        <!-- Tombol untuk menuju halaman detail -->
-                        <a href="{{ route('logbook.show', $logbook->id) }}">Detail</a>
-                        <!-- Tombol untuk menuju halaman edit -->
-                        <a href="{{ route('logbook.edit', $logbook->id) }}">Edit</a>
-                        <!-- Form untuk menghapus -->
-                        <form action="{{ route('logbook.destroy', $logbook->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="pagetitle">
+        <h1>Data Logbook</h1>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <div>
+                            <a href="{{ route('logbook.create') }}" class="btn btn-outline-primary">Tambah Logbook</a>
+                        </div>
+                        <table class="table datatable">
+                            <thead>
+                                <tr>
+                                    <th>Nama Mahasiswa</th>
+                                    <th>Dosen PA</th>
+                                    <th>Jenis Kegiatan</th> <!-- Menampilkan kolom nama mahasiswa -->
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($logbook as $logbooks)
+                                    <tr>
+                                        <td>{{ $logbooks->mahasiswa->name }}</td>
+                                        <td>{{ $logbooks->dosen->nama }}</td>
+                                        <td>{{ $logbooks->kegiatan->nama }}</td>
+                                        <td>
+                                            <a href="{{ route('logboook.show', $logbooks->id) }}" class="btn btn-info">Lihat</a>
+                                            <a href="#" class="btn btn-warning">Edit</a>
+                                            <form action="#" method="POST" style="display: inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

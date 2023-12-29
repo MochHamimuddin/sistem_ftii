@@ -8,6 +8,7 @@ use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdmAdminController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\LogboookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KategoriAdmController;
@@ -101,12 +102,10 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/kegiatan_peserta_create', [KegiatanPesertaController::class, 'create'])->name('kegiatan_peserta.create');
     Route::post('/kegiatan_peserta', [KegiatanPesertaController::class, 'store'])->name('kegiatan_peserta.store');
     Route::get('/detail_kegiatan', [KegiatanPesertaController::class, 'showAll'])->name('kegiatan_peserta.showAll');
-    Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
-    Route::get('/logbook/{id}/form', [LogbookController::class, 'showLogbookForm'])->name('logbook.form');
-    Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
-    Route::post('/logbook/store', [LogbookController::class, 'storeWeeklyLogbook'])->name('logbook.store');
-    Route::get('/logbook/{id}/edit', [LogbookController::class, 'edit'])->name('logbook.edit');
-    Route::put('/logbook/{id}/update', [LogbookController::class, 'update'])->name('logbook.update');
-    Route::delete('/logbook/{id}/delete', [LogbookController::class, 'destroy'])->name('logbook.destroy');
-
+    Route::get('/data_logbook', [LogboookController::class, 'index'])->name('logbook.index');
+    Route::get('/data_logbook/create', [LogboookController::class, 'create'])->name('logbook.create');
+    Route::post('/data_logbook/store', [LogboookController::class, 'store'])->name('logbook.store');
+    Route::get('/data_logbook/{id}', [LogboookController::class, 'show'])->name('logboook.show');
+    Route::get('/data_logbook/{id}/create-deskripsi', [LogboookController::class, 'createDeskripsi'])->name('logbook.create_deskripsi');
+    Route::post('/data_logbook/store-deskripsi/{id}', [LogboookController::class, 'storeDeskripsi'])->name('logbook.store_deskripsi');
 });
