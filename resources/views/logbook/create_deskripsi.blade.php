@@ -14,7 +14,7 @@
                                 $endDate = \Carbon\Carbon::parse($logbook->tanggal_akhir);
                                 $currentDate = \Carbon\Carbon::parse($logbook->tanggal_mulai)->startOfWeek(); // Start from the beginning of the week of the start date
                                 $weeksDifference = $startDate->diffInWeeks($endDate);
-                                $descriptions = []; // Replace this with your array of descriptions
+                                $descriptions = [];
                             @endphp
 
                             @for ($i = 0; $i <= $weeksDifference; $i++)

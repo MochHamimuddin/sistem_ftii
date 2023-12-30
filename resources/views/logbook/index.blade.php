@@ -30,9 +30,9 @@
                                         <td>{{ $logbooks->dosen->nama }}</td>
                                         <td>{{ $logbooks->kegiatan->nama }}</td>
                                         <td>
-                                            <a href="{{ route('logboook.show', $logbooks->id) }}" class="btn btn-info">Lihat</a>
-                                            <a href="#" class="btn btn-warning">Edit</a>
-                                            <form action="#" method="POST" style="display: inline-block;">
+                                            <a href="{{ route('logbook.show', $logbooks->id) }}" class="btn btn-info">Lihat</a>
+                                            <a href="{{ route('logbook.edit', $logbooks->id) }}" class="btn btn-warning">Edit</a>
+                                            <form action="{{ route('logbook.delete', $logbooks->id) }}" method="POST" style="display: inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?')">Hapus</button>

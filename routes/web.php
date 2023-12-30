@@ -103,9 +103,13 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::post('/kegiatan_peserta', [KegiatanPesertaController::class, 'store'])->name('kegiatan_peserta.store');
     Route::get('/detail_kegiatan', [KegiatanPesertaController::class, 'showAll'])->name('kegiatan_peserta.showAll');
     Route::get('/data_logbook', [LogboookController::class, 'index'])->name('logbook.index');
+    Route::get('/data_logbook/{id}', [LogboookController::class, 'show'])->name('logbook.show');
     Route::get('/data_logbook/create', [LogboookController::class, 'create'])->name('logbook.create');
     Route::post('/data_logbook/store', [LogboookController::class, 'store'])->name('logbook.store');
-    Route::get('/data_logbook/{id}', [LogboookController::class, 'show'])->name('logboook.show');
     Route::get('/data_logbook/{id}/create-deskripsi', [LogboookController::class, 'createDeskripsi'])->name('logbook.create_deskripsi');
     Route::post('/data_logbook/store-deskripsi/{id}', [LogboookController::class, 'storeDeskripsi'])->name('logbook.store_deskripsi');
+    Route::get('/data_logbook/{id}/edit', [LogboookController::class ,'edit'])->name('logbook.edit');
+    Route::put('/data_logbook/{id}', [LogboookController::class ,'update'])->name('logbook.update');
+    Route::delete('/data_logbook/{id}', [LogboookController::class, 'destroy'])->name('logbook.delete');
+    Route::get('/data_logbook/{id}/show-weekly-description', [LogboookController::class, 'showWeeklyDescription'])->name('logbook.show_weekly_description');
 });

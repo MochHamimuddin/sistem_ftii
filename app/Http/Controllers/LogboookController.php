@@ -21,11 +21,6 @@ class LogboookController extends Controller
         return view('logbook.index',compact('logbook'));
     }
 
-    /**php artisan config:clear
-php artisan cache:clear
-composer dump-autoload
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $kegiatans = Kegiatan::with('mahasiswa')->get()->unique('mahasiswa_id');
@@ -107,27 +102,78 @@ composer dump-autoload
 
         return redirect()->route('logbook.index')->with('error', 'Deskripsi tidak dapat diatur untuk entri logbook yang ditentukan.');
     }
+    public function showWeeklyDescription($id)
+{
+    $logbook = Logbook::findOrFail($id);
+
+    // Mengambil deskripsi dari logbook
+    $deskripsi = $logbook->deskripsi;
+
+    // Mengonversi JSON string ke array
+    $descriptions = json_decode($deskripsi);
+
+    // Mengubah array yang memiliki null menjadi array dengan minggu sebagai kunci
+    $formattedDescriptions = [];
+    foreach ($descriptions as $index => $description) {
+        // Jika deskripsi null, ganti dengan tanda -
+        $formattedDescriptions['Minggu ' . ($index + 1)] = $description ?? '-';
+    }
+
+    return view('logbook.weekly_deskripsi', compact('formattedDescriptions'));
+}
+
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+{
+    $logbook = Logbook::findOrFail($id);
+    $kegiatans = Kegiatan::with('mahasiswa')->get()->unique('mahasiswa_id');
+    $dosens = Dosen::all();
+
+    return view('logbook.edit', compact('logbook', 'kegiatans', 'dosens'));
+}
+
+public function update(Request $request, string $id)
+{
+    $validatedData = $request->validate([
+        'tanggal_mulai' => 'required|date',
+        'tanggal_akhir' => 'required|date',
+        'kegiatan_id' => 'required|exists:kegiatan,id',
+        'dosen_id' => 'required|exists:dosen,id',
+    ]);
+
+    $logbook = Logbook::findOrFail($id);
+    $kegiatan = Kegiatan::find($validatedData['kegiatan_id']);
+
+    if (!$kegiatan) {
+        return redirect()->back()->with('error', 'Kegiatan not found!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+    $logbook->tanggal_mulai = $validatedData['tanggal_mulai'];
+    $logbook->tanggal_akhir = $validatedData['tanggal_akhir'];
+    $logbook->mahasiswa_id = $kegiatan->mahasiswa_id;
+    $logbook->kegiatan_id = $validatedData['kegiatan_id'];
+    $logbook->dosen_id = $validatedData['dosen_id'];
+    $logbook->save();
+
+    return redirect()->route('logbook.index')->with('success', 'Logbook entry updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy($id)
+{
+    $logbook = Logbook::findOrFail($id);
+
+    if (!$logbook) {
+        return redirect()->route('logbook.index')->with('error', 'Logbook not found!');
     }
+    // Lakukan proses penghapusan
+    $logbook->delete();
+
+    return redirect()->route('logbook.index')->with('success', 'Logbook entry deleted successfully!');
+}
 }

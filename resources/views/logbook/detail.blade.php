@@ -31,6 +31,7 @@
                                     <td>{{ $logbook->tanggal_mulai }}</td>
                                     <td>{{ $logbook->tanggal_akhir }}</td>
                                     <td><a href="{{ route('logbook.create_deskripsi',$logbook->id) }}" class="btn btn-primary">Logbook Mingguan</a></td>
+                                    <td><a href="{{ route('logbook.show_weekly_description',$logbook->id) }}" class="btn btn-primary">Logbook Deskripsi</a></td>
                                 </tr>
                             </tbody>
                         </table>
