@@ -5,11 +5,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nama</th>
+                    <th>Nama Kegiatan</th>
                     <th>Status</th>
                     <th>Mitra</th>
                     <th>Program</th>
                     <th>Foto</th>
+                    <th>Silabus</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,11 +22,19 @@
                     <td>{{ $ket->program->nama }}</td>
                     <td>
                         @if($ket->foto)
-                            <img src="{{ asset('storage/foto_peserta/img/' . $ket->foto) }}" alt="Foto Kegiatan" style="max-width: 100px;">
+                            <img src="{{ asset('foto_peserta/img/' . $ket->foto) }}" alt="Foto Kegiatan" style="max-width: 100px;">
                         @else
                             No Image
                         @endif
                     </td>
+                    <td>
+                        @if($ket->berkas_kegiatan)
+                            <a href="{{ asset('silabus/' . $ket->berkas_kegiatan) }}" target="_blank">Lihat PDF</a>
+                        @else
+                            Tidak Ada PDF
+                        @endif
+                    </td>
+
                 </tr>
                 @endforeach
             </tbody>

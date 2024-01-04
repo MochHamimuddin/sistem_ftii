@@ -16,7 +16,7 @@ class Mahasiswa extends Authenticatable
         'nim','name','jenis_kelamin','semester','alamat', 'email','telpon', 'password','role', 'foto','program_id',
     ];
     public function Kegiatans (){
-        return $this->hasMany(Kegiatan::class,'mahasiswa_id');
+        return $this->hasMany(Kegiatan::class, 'mahasiswa_id');
     }
     public function program()
     {

@@ -30,7 +30,14 @@
                   <th scope="row">{{ $loop->iteration }}</th>
                   <td>{{ $data->nim }}</td>
                   <td>{{ $data->name }}</td>
-                  <td>{{ $data->Kegiatan->nama }}</td>
+                  <td>
+                    @foreach ($data->kegiatans as $kegiatan)
+                        {{ $kegiatan->nama }}
+                        @if (!$loop->last)
+                            ,
+                        @endif
+                    @endforeach
+                </td>
                   <td>
                     <a class="btn btn-primary" href="{{ route('mhs.show', $data->id) }}"><i class="bi bi-search"></i></a>
                     <a class="btn btn-warning" href="{{ route('mhs.edit', $data->id) }}"><i class="bi bi-pencil-square"></i></a>

@@ -18,7 +18,7 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $mhs = Mahasiswa::with('Kegiatan')->get();
+        $mhs = Mahasiswa::with('Kegiatans')->get();
 
         return view('masterdata.datapeserta', [
             'mhs' => $mhs,

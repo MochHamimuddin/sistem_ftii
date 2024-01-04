@@ -42,6 +42,7 @@ class KegiatanPesertaController extends Controller
     $validatedData = $request->validate([
         'nama' => 'required|string|max:255',
         'foto' => 'nullable|image|max:2048',
+        'berkas_kegiatan' => 'nullable|mimes:pdf|max:2048',
         'status' => 'required|in:Lolos,Tidak Lolos',
         'mitra_id' => 'required|exists:mitra,id',
         'program_id' => 'required|exists:program,id',
@@ -54,8 +55,14 @@ class KegiatanPesertaController extends Controller
     if ($request->hasFile('foto')) {
         $file = $request->file('foto');
         $fileName = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('foto_peserta/img', $fileName, 'public');
+        $file->move(public_path('foto_peserta/img'), $fileName);
         $validatedData['foto'] = $fileName;
+    }
+    if ($request->hasFile('berkas_kegiatan')){
+        $pdf = $request->file('berkas_kegiatan');
+        $namaPdf = $pdf->getClientOriginalName();
+        $pdf->move(public_path('silabus'), $namaPdf);
+        $validatedData['berkas_kegiatan'] = $namaPdf;
     }
     Kegiatan::create($validatedData);
 

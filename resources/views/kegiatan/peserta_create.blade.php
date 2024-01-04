@@ -12,6 +12,10 @@
             <label for="foto">Bukti Lolos Kegiatan</label>
             <input type="file" class="form-control" id="foto" name="foto" required>
         </div>
+        <div class="form-group">
+            <label for="berkas_kegiatan">Silabus Kegiatan</label>
+            <input type="file" class="form-control" id="berkas_kegiatan" name="berkas_kegiatan" required>
+        </div>
         <input type="hidden" name="status" value="Tidak Lolos">
         <div class="form-group">
             <label for="mitra_id">Mitra</label>

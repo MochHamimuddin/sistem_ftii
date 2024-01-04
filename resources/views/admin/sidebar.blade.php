@@ -98,13 +98,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/kategoriKonversi">
           <i class="bi bi-bookmark-plus"></i>
           <span>Penilaian Konversi</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{ route('final.index') }}">
           <i class="bi bi-folder"></i>
           <span>Final Project</span>
         </a>

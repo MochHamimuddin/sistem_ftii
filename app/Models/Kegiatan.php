@@ -13,7 +13,7 @@ class Kegiatan extends Model
     protected $table = 'kegiatan';
 
     protected $fillable = [
-        'nama','foto','status','mitra_id','program_id','mahasiswa_id'
+        'nama','foto','berkas_kegiatan','status','mitra_id','program_id','mahasiswa_id'
     ];
     public function mahasiswa()
     {

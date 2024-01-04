@@ -13,7 +13,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KategoriAdmController;
 use App\Http\Controllers\AdministrasiController;
+use App\Http\Controllers\FinalProjectController;
 use App\Http\Controllers\KegiatanPesertaController;
+use App\Http\Controllers\KategoriKonversiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,4 +114,16 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::put('/data_logbook/{id}', [LogboookController::class ,'update'])->name('logbook.update');
     Route::delete('/data_logbook/{id}', [LogboookController::class, 'destroy'])->name('logbook.delete');
     Route::get('/data_logbook/{id}/show-weekly-description', [LogboookController::class, 'showWeeklyDescription'])->name('logbook.show_weekly_description');
+    Route::get('/data_final', [FinalProjectController::class, 'index'])->name('final.index');
+    Route::get('/data_final/create', [FinalProjectController::class, 'create'])->name('final.create');
+    Route::post('/data_final/store', [FinalProjectController::class, 'store'])->name('final.store');
+    Route::get('/final/{id}', [FinalProjectController::class, 'show'])->name('final.show');
+    Route::get('/final/{id}/edit', [FinalProjectController::class, 'edit'])->name('final.edit');
+    Route::put('/final/{id}', [FinalProjectController::class, 'update'])->name('final.update');
+    Route::delete('/final/{id}', [FinalProjectController::class, 'destroy'])->name('final.destroy');
+    Route::get('/kategoriKonversi', [KategoriKonversiController::class, 'index'])->name('kategoriKonversi.index');
+    Route::get('/kategoriKonversi/create', [KategoriKonversiController::class, 'create'])->name('kategoriKonversi.create');
+    Route::post('/kategoriKonversi/store', [KategoriKonversiController::class, 'store'])->name('kategoriKonversi.store');
+    Route::post('/kategoriKonversi/import', [KategoriKonversiController::class, 'importExcel'])->name('kategoriKonversi.import');
+
 });

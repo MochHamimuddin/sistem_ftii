@@ -32,7 +32,14 @@
             </tr>
               <tr>
                 <th>Program</th>
-                <td>{{ $mhs->Kegiatan->nama }}</td>
+                <td>
+                    @foreach($mhs->kegiatans as $kegiatan)
+                        {{ $kegiatan->nama }}
+                        @if(!$loop->last)
+                            ,
+                        @endif
+                    @endforeach
+                </td>
               </tr>
               <tr>
                 <th>Mitra</th>

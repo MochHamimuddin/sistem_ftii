@@ -19,8 +19,8 @@
                             <thead>
                                 <tr>
                                     <th>Nama Mahasiswa</th>
+                                    <th>Jenis Kegiatan</th>
                                     <th>Status</th>
-                                    <th>Jenis Kegiatan</th> <!-- Menampilkan kolom nama mahasiswa -->
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
