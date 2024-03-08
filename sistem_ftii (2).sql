@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2024 at 12:18 AM
+-- Generation Time: Mar 08, 2024 at 07:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -102,6 +102,22 @@ CREATE TABLE `kategori_adm` (
   `tanggal_akhir` date NOT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `kategori_adm`
+--
+
+INSERT INTO `kategori_adm` (`id`, `nama`, `tanggal_mulai`, `tanggal_akhir`, `status`) VALUES
+(1, 'SPTJM', '2024-03-09', '2024-03-16', 1),
+(2, 'Surat Rekomendasi', '2024-03-09', '2024-03-16', 1),
+(3, 'Surat Letter Of Acceptment(LOA)', '2024-03-09', '2024-03-16', 1),
+(4, 'Kartu Rancangan Konversi SKS', '2024-03-09', '2024-03-16', 1),
+(5, 'Transkip Nilai', '2024-03-09', '2024-03-16', 1),
+(6, 'Logbook', '2024-03-09', '2024-03-16', 1),
+(7, 'Final Project', '2024-03-09', '2024-03-16', 1),
+(8, 'Kartu Nilai Konversi SKS', '2024-03-09', '2024-03-16', 1),
+(9, 'Dokumentasi Kegiatan', '2024-03-09', '2024-03-16', 1),
+(10, 'Bukti Hadir Seminar Kegiatan', '2024-03-09', '2024-03-16', 1);
 
 -- --------------------------------------------------------
 
@@ -230,6 +246,16 @@ CREATE TABLE `mitra` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `mitra`
+--
+
+INSERT INTO `mitra` (`id`, `nama`, `foto`, `created_at`, `updated_at`) VALUES
+(1, 'MBKM', 'client-1.png', NULL, NULL),
+(2, 'MAGENTA', 'client-2.png', NULL, NULL),
+(3, 'DICODING', 'client-4.jpg', NULL, NULL),
+(4, 'INTERNAL FTII', 'client-3.png', NULL, '2024-03-08 10:51:16');
+
 -- --------------------------------------------------------
 
 --
@@ -274,6 +300,20 @@ CREATE TABLE `program` (
   `mitra_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `program`
+--
+
+INSERT INTO `program` (`id`, `nama`, `foto`, `mitra_id`) VALUES
+(1, 'Kampus Mengajar', 'km-1.png', 1),
+(2, 'Magang dan Studi Independen', 'km-2.png', 1),
+(3, 'Pertukaran Mahasiswa ', 'km-3.png', 1),
+(4, 'Wirausaha Merdeka', 'km-4.png', 1),
+(5, 'Indonesian International Student Mobility Awa', 'km-5.png', 1),
+(6, 'Praktisi Mengajar ', 'km-6.png', 1),
+(7, 'Magang Khusus', NULL, 2),
+(8, 'Magang Umum', NULL, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -292,6 +332,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `nim`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 1001, 'admin', 'admin@gmail.com', NULL, '$2y$12$P86SRIhwUdYH4yQB0zjwaO2XIC87bImByJiMalYeV7pGzWj6bcfRO', 'admin', 'OseC5TigOnP66eAvunMAyTr0cFco8iLWn86aVxIaCMXY9nA21YH7EzvAzQSq', '2024-03-08 10:33:29', '2024-03-08 10:33:29');
 
 --
 -- Indexes for dumped tables
@@ -444,7 +491,7 @@ ALTER TABLE `final_project`
 -- AUTO_INCREMENT for table `kategori_adm`
 --
 ALTER TABLE `kategori_adm`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `kategori_konversi`
@@ -486,7 +533,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mitra`
 --
 ALTER TABLE `mitra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -498,13 +545,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
