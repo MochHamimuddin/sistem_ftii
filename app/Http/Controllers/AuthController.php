@@ -87,6 +87,7 @@ class AuthController extends Controller
             'email'=>$request->email,
             'telpon'=>$request->telpon,
             'password'=>hash::make($request->password),
+            'role' => 'mahasiswa',
             'foto' => '1.png',
             'program_id'=>$request->program_id,
             'remember_token' => Str::random(60),
