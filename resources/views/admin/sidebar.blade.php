@@ -3,7 +3,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
         @if(auth()->user()->role=="peserta")
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/dashboard">
+        <a class="nav-link collapsed" href="/DashboardPeserta">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>

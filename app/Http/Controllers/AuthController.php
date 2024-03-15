@@ -23,7 +23,7 @@ class AuthController extends Controller
     public function prosesLogin(Request $request)
     {
        if (Auth::guard('mahasiswa')->attempt($request->only('nim','password'))) {
-        return redirect('/dashboard');
+        return redirect('/dashboardPeserta');
        }elseif(Auth::guard('user')->attempt($request->only('nim','password'))){
         return redirect('/dashboard');
        }
@@ -87,7 +87,7 @@ class AuthController extends Controller
             'email'=>$request->email,
             'telpon'=>$request->telpon,
             'password'=>hash::make($request->password),
-            'role' => 'mahasiswa',
+            'role' => 'peserta',
             'foto' => '1.png',
             'program_id'=>$request->program_id,
             'remember_token' => Str::random(60),

@@ -15,6 +15,7 @@ use App\Http\Controllers\KategoriAdmController;
 use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\FinalProjectController;
 use App\Http\Controllers\KegiatanPesertaController;
+use App\Http\Controllers\DashboardPesertaController;
 use App\Http\Controllers\KategoriKonversiController;
 
 /*
@@ -54,6 +55,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });*/
 Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koordinator MBKM,peserta']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('Dashboard.index');
+    Route::get('/DashboardPeserta', [DashboardPesertaController::class, 'index'])->name('dashboardPeserta.index');
     Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
@@ -82,6 +84,8 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/kategori_adm/{id}', [AdministrasiController::class, 'show'])->name('adm.show');
     Route::get('/administrasi', [AdministrasiController::class, 'index'])->name('administrasi.index');
     Route::post('/administrasi/upload/{kategori_adm_id}', [AdministrasiController::class, 'upload'])->name('administrasi.upload');
+    Route::get('/administrasi/{kategori_adm_id}/edit', [AdministrasiController::class, 'editBerkas'])->name('administrasi.edit');
+    Route::put('/administrasi/{kategori_adm_id}/update', [AdministrasiController::class, 'updateBerkas'])->name('administrasi.update');
     Route::get('/view-administrasi', [AdmAdminController::class, 'viewAdministrasi'])->name('view_administrasi');
     Route::get('/kategori-adm', [AdmAdminController::class, 'index'])->name('kategori_adm.index');
     Route::get('/kategori-adm/{id}/status', [AdmAdminController::class, 'status'])->name('kategori_adm.status');
@@ -124,6 +128,7 @@ Route::group(['middleware' => ['auth:user,mahasiswa', 'cekRole:admin,kaprodi,Koo
     Route::get('/kategoriKonversi', [KategoriKonversiController::class, 'index'])->name('kategoriKonversi.index');
     Route::get('/kategoriKonversi/create', [KategoriKonversiController::class, 'create'])->name('kategoriKonversi.create');
     Route::post('/kategoriKonversi/store', [KategoriKonversiController::class, 'store'])->name('kategoriKonversi.store');
-    Route::post('/kategoriKonversi/import', [KategoriKonversiController::class, 'importExcel'])->name('kategoriKonversi.import');
+    Route::get('/kategoriKonversi1', [KategoriKonversiController::class, 'exportExcel'])->name('kategoriKonversi.export');
+    Route::post('/kategoriKonversi', [KategoriKonversiController::class, 'importExcel'])->name('kategoriKonversi.import');
 
 });

@@ -7,6 +7,7 @@ use App\Models\Mahasiswa;
 use App\Models\KategoriAdm;
 use App\Models\Administrasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdministrasiController extends Controller
 {
@@ -24,7 +25,6 @@ class AdministrasiController extends Controller
     $request->validate([
         'berkas' => 'required|mimes:pdf|max:2048'
     ]);
-
     $mahasiswa_id = auth()->user()->id;
 
     $file = $request->file('berkas');
@@ -38,11 +38,38 @@ class AdministrasiController extends Controller
         'kategori_adm_id' => $kategori_adm_id,
         'tanggal_pengumpulan' => $waktuWIB,
         'berkas' => $filePath,
-        'keterangan' => '0',
     ]);
-
-
     return redirect()->back()->with('success', 'Berkas berhasil diunggah!');
 }
+public function editBerkas($kategori_adm_id)
+{
+    $administrasi = Administrasi::where('kategori_adm_id', $kategori_adm_id)->first();
 
+    if (!$administrasi) {
+        return redirect()->back()->with('error', 'Berkas tidak ditemukan!');
+    }
+
+    return view('administrasi.edit_berkas', compact('administrasi'));
+}
+
+    public function updateBerkas(Request $request, $administrasi_id)
+    {
+    $request->validate([
+        'berkas' => 'required|mimes:pdf|max:2048'
+    ]);
+    $administrasi = Administrasi::find($administrasi_id);
+
+    if (!$administrasi) {
+        return redirect()->back()->with('error', 'Berkas tidak ditemukan!');
+    }
+    $file = $request->file('berkas');
+    $fileName = time() . '_' . $file->getClientOriginalName();
+    $filePath = $file->storeAs('berkas_adm', $fileName);
+    Storage::delete($administrasi->berkas);
+    $administrasi->update([
+        'berkas' => $filePath,
+    ]);
+
+    return redirect()->back()->with('success', 'Berkas berhasil diubah!');
+    }
 }

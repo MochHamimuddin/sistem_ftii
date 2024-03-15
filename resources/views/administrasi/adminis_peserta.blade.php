@@ -31,15 +31,15 @@
                                         <td>{{ $kat->tanggal_akhir }}</td>
                                         <td>
                                             @if($kat->administrasi && $kat->administrasi->keterangan == 1)
-                                                Berkas Sudah Diunggah (Pending)
+                                                Sudah Diunggah (Pending)
                                             @else
-                                                Berkas Belum Diunggah
+                                                Belum Diunggah
                                             @endif
                                         </td>
                                         <td>
-                                            <!-- Tombol untuk membuka modal -->
+                                            <a href="{{ route('administrasi.edit', ['kategori_adm_id' => $kat->id]) }}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadModal{{ $kat->id }}">
-                                                Unggah Berkas
+                                                <i class="bi bi-upload"></i>
                                             </button>
                                             <!-- Modal untuk setiap entri -->
                                             <div class="modal fade" id="uploadModal{{ $kat->id }}" tabindex="-1" aria-labelledby="uploadModalLabel{{ $kat->id }}" aria-hidden="true">
