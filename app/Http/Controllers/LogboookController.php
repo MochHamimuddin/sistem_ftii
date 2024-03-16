@@ -65,6 +65,11 @@ class LogboookController extends Controller
     public function show(string $id)
     {
     $logbook = Logbook::with('kegiatan', 'mahasiswa', 'dosen')->find($id);
+
+    if (!$logbook) {
+        return redirect()->route('logbook.index')->with('error', 'Logbook not found!');
+    }
+
     return view('logbook.detail', compact('logbook'));
     }
 

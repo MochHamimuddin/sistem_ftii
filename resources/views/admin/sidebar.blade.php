@@ -23,11 +23,11 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="/kegiatan_peserta_create">
           <i class="bi bi-calendar-week"></i>
-          <span>Timeline Kegiatan</span>
+          <span>Konfirmasi Kegiatan</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('logbook.create')}}">
+        <a class="nav-link collapsed" href="/data_logbook/{id}/create-deskripsi">
           <i class="bi bi-calendar-week"></i>
           <span>Logbook</span>
         </a>
