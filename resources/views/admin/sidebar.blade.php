@@ -26,12 +26,14 @@
           <span>Konfirmasi Kegiatan</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/data_logbook/{id}/create-deskripsi">
-          <i class="bi bi-calendar-week"></i>
-          <span>Logbook</span>
-        </a>
-      </li>
+      @foreach($logbookEntries as $logbook)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('logbook.create_deskripsi', ['id' => $logbook->id]) }}">
+                        <i class="bi bi-calendar-week"></i>
+                        <span>Logbook ({{ $logbook->id }})</span>
+                    </a>
+                </li>
+            @endforeach
       <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="bi bi-bookmark-plus"></i>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2024 at 07:04 PM
+-- Generation Time: Mar 18, 2024 at 05:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -31,11 +31,19 @@ CREATE TABLE `berkas_adm` (
   `id` int(11) NOT NULL,
   `mahasiswa_id` int(11) NOT NULL,
   `kategori_adm_id` int(11) NOT NULL,
-  `berkas` varchar(45) DEFAULT NULL,
-  `keterangan` int(11) DEFAULT NULL,
+  `tanggal_pengumpulan` datetime NOT NULL,
+  `berkas` varchar(255) DEFAULT NULL,
+  `keterangan` int(11) DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `berkas_adm`
+--
+
+INSERT INTO `berkas_adm` (`id`, `mahasiswa_id`, `kategori_adm_id`, `tanggal_pengumpulan`, `berkas`, `keterangan`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '2024-03-12 04:30:22', 'berkas_adm/1710196726_Tutorial cara mengisi KRS.pdf', 2, '2024-03-11 14:30:22', '2024-03-11 15:38:46');
 
 -- --------------------------------------------------------
 
@@ -51,11 +59,18 @@ CREATE TABLE `dosen` (
   `alamat` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `telpon` varchar(12) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `foto` varchar(45) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `dosen`
+--
+
+INSERT INTO `dosen` (`id`, `kode_dosen`, `nama`, `jenis_kelamin`, `alamat`, `email`, `telpon`, `password`, `foto`, `created_at`, `updated_at`) VALUES
+(1, 1002, 'Mia Kamayani', 'P', 'ps rebo', 'miakamayani@gmail.com', '08123123123', '$2y$12$eHrEx3kwx6juPi2zmrVvI.qHZgBrWdHuBeEm.l1.BJv2.BO95sal6', '1.png', '2024-03-11 11:55:08', '2024-03-11 11:55:08');
 
 -- --------------------------------------------------------
 
@@ -142,11 +157,19 @@ CREATE TABLE `kegiatan` (
   `id` int(11) NOT NULL,
   `nama` varchar(45) NOT NULL,
   `status` enum('Lolos','Tidak Lolos') DEFAULT NULL,
-  `foto` varchar(45) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  `berkas_kegiatan` varchar(255) NOT NULL,
   `mitra_id` int(11) NOT NULL,
   `program_id` int(11) NOT NULL,
   `mahasiswa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `kegiatan`
+--
+
+INSERT INTO `kegiatan` (`id`, `nama`, `status`, `foto`, `berkas_kegiatan`, `mitra_id`, `program_id`, `mahasiswa_id`) VALUES
+(1, 'Fullstack Web Developer', 'Lolos', '1710182080_WhatsApp Image 2024-03-07 at 05.57.04.jpeg', '', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -181,6 +204,13 @@ CREATE TABLE `logbook` (
   `dosen_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `logbook`
+--
+
+INSERT INTO `logbook` (`id`, `deskripsi`, `tanggal_mulai`, `tanggal_akhir`, `status`, `kegiatan_id`, `mahasiswa_id`, `dosen_id`) VALUES
+(1, 'apa saja', '2024-03-01', '2024-04-30', 0000000001, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -190,13 +220,13 @@ CREATE TABLE `logbook` (
 CREATE TABLE `mahasiswa` (
   `id` int(11) NOT NULL,
   `nim` int(11) NOT NULL,
-  `nama` varchar(45) NOT NULL,
+  `name` varchar(45) NOT NULL,
   `jenis_kelamin` enum('L','P') NOT NULL,
   `semester` varchar(45) NOT NULL,
   `alamat` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `telpon` varchar(12) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `role` varchar(45) NOT NULL,
   `foto` varchar(45) DEFAULT NULL,
   `program_id` int(11) NOT NULL,
@@ -204,6 +234,13 @@ CREATE TABLE `mahasiswa` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `mahasiswa`
+--
+
+INSERT INTO `mahasiswa` (`id`, `nim`, `name`, `jenis_kelamin`, `semester`, `alamat`, `email`, `telpon`, `password`, `role`, `foto`, `program_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 2003015150, 'Hamimuddin', 'L', '8(Genap)', 'Kp.Kapuk I No.49 RT.005/RW.006', 'mochhamimuddin@gmail.com', '081233838624', '$2y$12$MuV.rzEtFM/CBEj41L9c7ui47S.f18e8.RGwu7yWjeQDlu4bRUuni', 'peserta', '1.png', 2, NULL, '2024-03-10 08:00:41', '2024-03-10 08:00:41');
 
 -- --------------------------------------------------------
 
@@ -338,7 +375,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nim`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1001, 'admin', 'admin@gmail.com', NULL, '$2y$12$P86SRIhwUdYH4yQB0zjwaO2XIC87bImByJiMalYeV7pGzWj6bcfRO', 'admin', 'OseC5TigOnP66eAvunMAyTr0cFco8iLWn86aVxIaCMXY9nA21YH7EzvAzQSq', '2024-03-08 10:33:29', '2024-03-08 10:33:29');
+(1, 1001, 'admin', 'admin@gmail.com', NULL, '$2y$12$P86SRIhwUdYH4yQB0zjwaO2XIC87bImByJiMalYeV7pGzWj6bcfRO', 'admin', 'dUBBWWgNgebaVPs0PaeLEZzGtxnTn5qxWELVejTGL3gBDCAlOngss3m6J06L', '2024-03-08 10:33:29', '2024-03-08 10:33:29');
 
 --
 -- Indexes for dumped tables
@@ -467,13 +504,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `berkas_adm`
 --
 ALTER TABLE `berkas_adm`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -503,7 +540,7 @@ ALTER TABLE `kategori_konversi`
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konversi`
@@ -515,13 +552,13 @@ ALTER TABLE `konversi`
 -- AUTO_INCREMENT for table `logbook`
 --
 ALTER TABLE `logbook`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
